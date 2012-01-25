@@ -62,6 +62,13 @@
       </address>
     </author>
 
+    <author fullname="Guy Bailey" initials="G." surname="Bailey">
+      <organization abbrev="Microsoft">Microsoft Corporation</organization>
+      <address>
+        <email>gubailey@microsoft.com</email>
+      </address>
+    </author>
+
     <date day="25" month="April" year="2011"/>
 
     <abstract>
