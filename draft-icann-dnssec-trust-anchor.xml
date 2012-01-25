@@ -18,8 +18,7 @@
 <!ENTITY rfc5155 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
 <!ENTITY rfc5702 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5702.xml">
 <!ENTITY rfc5751 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
-<!ENTITY ICANNDPS PUBLIC "" "../dps/icann-dps.front">
-<!ENTITY FRONT PUBLIC "" "draft-icann-dnssec-trust-anchor.front">
+<!ENTITY ICANNDPS PUBLIC "" "icann-dps-reference.xml">
 ]>
 
 <?rfc strict="yes" ?>
