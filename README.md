@@ -3,5 +3,6 @@ draft-jabley-dnssec-trust-anchor.
 
 Authors:
 
-- Jakob Schlyter
-- Joe Abley
+- Jakob Schlyter, Kirei
+- Joe Abley, ICANN
+- Guy Baily, Microsoft
