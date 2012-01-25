@@ -5,4 +5,4 @@ Authors:
 
 - Jakob Schlyter, Kirei
 - Joe Abley, ICANN
-- Guy Baily, Microsoft
+- Guy Bailey, Microsoft
