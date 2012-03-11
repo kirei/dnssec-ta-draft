@@ -7,6 +7,7 @@
 <!ENTITY rfc2616 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml">
 <!ENTITY rfc2818 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2818.xml">
 <!ENTITY rfc2986 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2986.xml">
+<!ENTITY rfc3280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3280.xml">
 <!ENTITY rfc3339 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml">
 <!ENTITY rfc4033 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4033.xml">
 <!ENTITY rfc4034 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4034.xml">
@@ -14,6 +15,7 @@
 <!ENTITY rfc4509 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4509.xml">
 <!ENTITY rfc4641 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4641.xml">
 <!ENTITY rfc4880 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4880.xml">
+<!ENTITY rfc5011 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5011.xml">
 <!ENTITY rfc5155 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
 <!ENTITY rfc5702 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5702.xml">
 <!ENTITY rfc5751 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
@@ -25,7 +27,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
-<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-03"
+<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-04"
   ipr="trust200902">
 
   <front>
@@ -63,11 +65,19 @@
     <author fullname="Guy Bailey" initials="G." surname="Bailey">
       <organization abbrev="Microsoft">Microsoft Corporation</organization>
       <address>
+        <postal>
+          <street>One Microsoft Way</street>
+          <city>Redmond</city>
+          <region>WA</region>
+          <code>98052</code>
+          <country>US</country>
+        </postal>
+        <phone>+1 425 538 6153 x86153</phone>
         <email>gubailey@microsoft.com</email>
       </address>
     </author>
 
-    <date day="25" month="April" year="2011"/>
+    <date day="16" month="March" year="2012"/>
 
     <abstract>
       <t>The root zone of the Domain Name System (DNS) has been
@@ -84,35 +94,35 @@
   <middle>
     <section title="Introduction">
       <t>The Domain Name System (DNS) is described in <xref
-	target="RFC1034" /> and <xref target="RFC1035" />. Security
-	extensions to the DNS (DNSSEC) are described in <xref
-	target="RFC4033" />, <xref target="RFC4034" />, <xref
-	target="RFC4035" />, <xref target="RFC4509" />, <xref
-	target="RFC5155" /> and <xref target="RFC5702" />.</t>
+    target="RFC1034" /> and <xref target="RFC1035" />. Security
+    extensions to the DNS (DNSSEC) are described in <xref
+    target="RFC4033" />, <xref target="RFC4034" />, <xref
+    target="RFC4035" />, <xref target="RFC4509" />, <xref
+    target="RFC5155" /> and <xref target="RFC5702" />.</t>
 
       <t>A discussion of operational practices relating to DNSSEC
         can be found in <xref target="RFC4641" />.</t>
 
       <t>In DNSSEC resource record sets (RRSets) are
-	cryptographically-signed, such that a response to a query
+    cryptographically-signed, such that a response to a query
         contains signatures which allow its integrity and authenticity
         to be verified. An individual signature is validated by
-	following a chain of signatures to a key which is trusted
-	for some extra-protocol reason.</t>
+    following a chain of signatures to a key which is trusted
+    for some extra-protocol reason.</t>
 
       <t>The publication of trust anchors for the root zone of the
-	DNS is an IANA function performed by ICANN.  A detailed
-	description of corresponding key management practices can
-	be found in <xref target="DPS"/>, which can be retrieved
-	from the IANA Repository located at <eref
-	target="https://www.iana.org/dnssec/"/>.</t>
+    DNS is an IANA function performed by ICANN.  A detailed
+    description of corresponding key management practices can
+    be found in <xref target="DPS"/>, which can be retrieved
+    from the IANA Repository located at <eref
+    target="https://www.iana.org/dnssec/"/>.</t>
 
       <t>This document describes the distribution of DNSSEC trust
-	anchors.  Whilst the data formats and the publication and
-	retrieval methods described in this document might well be
-	adapted for other uses, this document's focus is more
-	specific and is concerned only with the distribution of
-	trust anchors for the root zone.</t>
+    anchors.  Whilst the data formats and the publication and
+    retrieval methods described in this document might well be
+    adapted for other uses, this document's focus is more
+    specific and is concerned only with the distribution of
+    trust anchors for the root zone.</t>
     </section>
 
     <section title="Root Zone Trust Anchor Publication">
@@ -120,11 +130,11 @@
         each of which is described in this document:
 
          <list style="symbols">
-	   <t>as the hashes of the corresponding DNSKEY records,
-	     consistent with the defined presentation format of
-	     Delegation Signer (DS) resource records <xref
-	     target="RFC4034"/>, contained within an XML document,
-	     as described in <xref target="xml"/>, and</t>
+       <t>as the hashes of the corresponding DNSKEY records,
+         consistent with the defined presentation format of
+         Delegation Signer (DS) resource records <xref
+         target="RFC4034"/>, contained within an XML document,
+         as described in <xref target="xml"/>, and</t>
 
            <t>as Certificate Signing Requests (CSRs) in PKCS#10
              format <xref target="RFC2986"/>
@@ -136,12 +146,12 @@
 
       <section title="XML" anchor="xml">
         <t>Trust anchors are published in an XML document whose schema
-	  is described in <xref target="schema" />. The document
-	  contains a complete set of trust anchors for the root
-	  zone, including anchors suitable for immediate use and
-	  also historical data. Each trust anchor optionally includes
-	  Uniform Resource Locators (URLs) for retrieving corresponding
-	  X.509 certificates.</t>
+      is described in <xref target="schema" />. The document
+      contains a complete set of trust anchors for the root
+      zone, including anchors suitable for immediate use and
+      also historical data. Each trust anchor optionally includes
+      Uniform Resource Locators (URLs) for retrieving corresponding
+      X.509 certificates.</t>
 
         <t>Examples of trust anchors packaged and signed for
           publication can be found in <xref target="examples" />.</t>
@@ -180,9 +190,9 @@
           target="RFC2616" />.</t>
 
         <t>The URL for retrieving the CSR is
-	  &lt;http://data.iana.org/root-anchors/key-label.csr&gt;,
-	  with "key-label" replaced by the key label of the
-	  corresponding KSK.</t>
+      &lt;http://data.iana.org/root-anchors/key-label.csr&gt;,
+      with "key-label" replaced by the key label of the
+      corresponding KSK.</t>
 
         <t>The URL for retrieving the IANA-signed Certificate is
           &lt;http://data.iana.org/root-anchors/key-label.crt&gt;,
@@ -202,7 +212,7 @@
           />.</t>
       </section>
 
-      <section title="HTTP Over TLS">
+      <section title="HTTP Over TLS" anchor="HTTPOverTLS">
         <t>Trust anchors are available for retrieval using HTTP over TLS
           <xref target="RFC2818" />.</t>
 
@@ -231,27 +241,27 @@
           target="https://data.iana.org/root-anchors/root-anchors.asc"
           />.</t>
 
-	<t>TLS sessions are authenticated with certificates presented
-	  from the server. No client certificate verification is
-	  performed. The certificate presented by the server is
-	  chosen such that it can be trusted using an X.509 trust
-	  anchor that is believed to be well-known, e.g. one that
-	  corresponds to a WebTrust-accredited Certificate Authority.
-	  Other TLS authentication mechanisms may be considered in
-	  the future.</t>
+    <t>TLS sessions are authenticated with certificates presented
+      from the server. No client certificate verification is
+      performed. The certificate presented by the server is
+      chosen such that it can be trusted using an X.509 trust
+      anchor that is believed to be well-known, e.g. one that
+      corresponds to a WebTrust-accredited Certificate Authority.
+      Other TLS authentication mechanisms may be considered in
+      the future.</t>
 
       </section>
 
       <section title="Signature Verification" anchor="sigs">
         <t>The OpenPGP <xref target="RFC4880"/> keys used to sign
           trust anchor documents carry signatures from personal
-	  keys of staff who are able to personally attest to their
-	  validity. Those staff members will continue to make their
-	  personal keys freely available for examination by third
-	  parties, e.g. by way of PGP key parties at operator and
-	  IETF meetings. In this fashion a diverse set of paths
-	  through the PGP web of trust will be maintained to the
-	  trust anchor PGP keys.</t>
+      keys of staff who are able to personally attest to their
+      validity. Those staff members will continue to make their
+      personal keys freely available for examination by third
+      parties, e.g. by way of PGP key parties at operator and
+      IETF meetings. In this fashion a diverse set of paths
+      through the PGP web of trust will be maintained to the
+      trust anchor PGP keys.</t>
 
         <t>An OpenPGP keyring containing public keys pertinent to
           signature verification is published at <eref
@@ -264,6 +274,75 @@
           administered by ICANN as the IANA functions operator and also
           optionally by well-known (e.g. WebTrust-certified) CAs to facilitate
           signature validation with widely-available X.509 trust anchors.</t>
+      </section>
+    </section>
+
+    <section title="Implementation Considerations">
+      <t>Note: This non-normative section gives suggestions for
+        implementing root zone trust anchor retrieval.</t>
+
+      <t>Root trust anchor retrieval by the HTTP or HTTP over TLS
+        transports has several implementation considerations to
+        ensure robustness, usability and secure operation.</t>
+
+      <section title="HTTP Over TLS Transport">
+        <t>The HTTP over TLS transport <xref target="RFC2818"/> is
+          suggested over the HTML transport <xref target="RFC2616"/>
+          for implementations using the XML-format root trust
+          anchors, since the latter transport does not provide
+          authentication. It is not suggested that implementations
+          restrict certification path validation of the HTTP over
+          TLS transport session to the current or historical
+          certificate authorities used by the root trust anchor
+          server, since doing so would reduce robustness of the
+          implementation. It is suggested that the implementation
+          configure the HTTP over TLS transport library to validate
+          the certification path against certificate revocation
+          lists <xreg target="RFC3280"/>, and reject self-signed
+          certificates and certification paths that do not
+          terminate in a trusted certificate authority.</t>
+
+        <t>Implementations can allow configuration of the URL used
+          to retrieve the root trust anchor resources, but it is
+          suggested that the default configuration use the URLs
+          specified in <xref target="HTTPOverTLS"/>.</t>
+      </section>
+
+      <section title="XML Validation">
+        <t>Implementations may perform strict validation of the
+          retrieved XML document against the XML schema; however,
+          such an implementation would not be robust against future
+          changes in the XML schema. It is suggested that the
+          implementation perform "loose" validation, where unknown
+          attributes and elements are ignored. This suggestion
+          allows for furture additions to the XML schema without
+          affecting existing implementations.</t>
+      </section>
+
+      <section title="Trust Anchor Validation">
+        <t>The implementation can ignore trust anchors for which
+          the Algorithm or DigestType elements refer to an unknown,
+          or unsupported algorithm. Additionally, trust anchors for
+          which the Algorithm or DigestType elements refer to a
+          deprecated algorithm can be ignored, provided that this
+          suggestion does not cause all trust anchors to be
+          ignored. Further, note that these suggestions may not
+          apply where an implementation shares trust anchors
+          between many DNS validating resolvers, since the set of
+          supported algorithms may vary between resolvers, and
+          could possibly be disjoint.</t>
+
+        <t>The implementation can also ignore a trust anchor when
+          the validUntil time, if present, is in the past. If the
+          implementation also supports automated updates of trust
+          anchors <xref target="RFC5011"/>, it can ignore trust
+          anchors where the current time subtracted from the
+          validFrom time, if present, is greater than the add-hold
+          down time <xref target="RFC5011"/> for the trust
+          point.</t>
+
+        <t>The implementation can reject any trust anchor for a
+        trust point other than the root zone.</t>
       </section>
     </section>
 
@@ -296,7 +375,7 @@
         usefully into user environments.</t>
     </section>
 
-    <section title="Acknowledgements">        
+    <section title="Acknowledgements">
       <t>Many pioneers paved the way for the deployment of DNSSEC
         in the root zone of the DNS, and the authors hereby acknowledge
         their substantial collective contribution.</t>
@@ -314,6 +393,7 @@
       &rfc2616;
       &rfc2818;
       &rfc2986;
+      &rfc3280;
       &rfc3339;
       &rfc4033;
       &rfc4034;
@@ -321,6 +401,7 @@
       &rfc4509;
       &rfc4641;
       &rfc4880;
+      &rfc5011;
       &rfc5155;
       &rfc5702;
       &rfc5751;
@@ -387,7 +468,7 @@ keydigest = element KeyDigest {
 <TrustAnchor
     id="AD42165F-B099-4778-8F42-D34A1D41FD93"
     source="http://data.iana.org/root-anchors/root-anchors.xml">
-  
+
     <Zone>.</Zone>
 
     <KeyDigest id="42"
@@ -448,7 +529,7 @@ resourceRecord ATTRIBUTE ::= {
     EQUALITY MATCHING RULE caseIgnoreIA5Match
     ID iana-dns
 }
-    
+
 END
 ]]>
        </artwork>
@@ -457,11 +538,11 @@ END
 
     <section title="Historical Note">
       <t>The first KSK for use in the root zone of the DNS was
-	generated at a key ceremony at an ICANN Key Management Facility
-	(KMF) in Culpeper, Virginia, USA on 2010-06-16.  This key
-	entered production during a second key ceremony held at an
-	ICANN KMF in El Segundo, California, USA on 2010-07-12.
-	The resulting trust anchor was first published on 2010-07-15.</t>
+    generated at a key ceremony at an ICANN Key Management Facility
+    (KMF) in Culpeper, Virginia, USA on 2010-06-16.  This key
+    entered production during a second key ceremony held at an
+    ICANN KMF in El Segundo, California, USA on 2010-07-12.
+    The resulting trust anchor was first published on 2010-07-15.</t>
     </section>
 
     <section title="About this Document">
@@ -499,7 +580,7 @@ END
           <t>Draft expired.</t>
         </section>
 
-        <section title="draft-jabley-dnssec-trust-anchor-03">
+        <section title="draft-jabley-dnssec-trust-anchor-04">
           <t>Added the optional &lt;Certificate&gt; element to the XML
             schema to provide a mechanism for locating external
             X.509 certificates relating to a particular key.</t>
