@@ -286,21 +286,19 @@
         ensure robustness, usability and secure operation.</t>
 
       <section title="HTTP Over TLS Transport">
-        <t>The HTTP over TLS transport <xref target="RFC2818"/> is
-          suggested over the HTML transport <xref target="RFC2616"/>
-          for implementations using the XML-format root trust
-          anchors, since the latter transport does not provide
-          authentication. It is not suggested that implementations
-          restrict certification path validation of the HTTP over
-          TLS transport session to the current or historical
-          certificate authorities used by the root trust anchor
+        <t>The HTTP over TLS transport <xref target="RFC2818"/> is suggested
+          over the unencrypted HTTP transport <xref target="RFC2616"/> for
+          implementations using the XML-format root trust anchors, since the
+          latter transport does not provide authentication. It is not
+          suggested that implementations restrict certification path
+          validation of the HTTP over TLS transport session to the current or
+          historical certificate authorities used by the root trust anchor
           server, since doing so would reduce robustness of the
-          implementation. It is suggested that the implementation
-          configure the HTTP over TLS transport library to validate
-          the certification path against certificate revocation
-          lists <xreg target="RFC3280"/>, and reject self-signed
-          certificates and certification paths that do not
-          terminate in a trusted certificate authority.</t>
+          implementation. It is suggested that the implementation configure
+          the HTTP over TLS transport library to validate the certification
+          path against certificate revocation lists <xreg target="RFC3280"/>,
+          and reject self-signed certificates and certification paths that do
+          not terminate in a trusted certificate authority.</t>
 
         <t>Implementations can allow configuration of the URL used
           to retrieve the root trust anchor resources, but it is
