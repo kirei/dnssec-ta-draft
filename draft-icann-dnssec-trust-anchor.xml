@@ -294,7 +294,7 @@
           server, since doing so would reduce robustness of the
           implementation. It is suggested that the implementation configure
           the HTTP over TLS transport library to validate the certification
-          path against certificate revocation lists <xreg target="RFC3280"/>,
+          path against certificate revocation lists <xref target="RFC3280"/>,
           and reject self-signed certificates and certification paths that do
           not terminate in a trusted certificate authority.</t>
 
