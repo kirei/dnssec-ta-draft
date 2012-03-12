@@ -311,7 +311,7 @@
           changes in the XML schema. It is suggested that the
           implementation perform "loose" validation, where unknown
           attributes and elements are ignored. This suggestion
-          allows for furture additions to the XML schema without
+          allows for future additions to the XML schema without
           affecting existing implementations.</t>
       </section>
 
