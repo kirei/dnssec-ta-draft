@@ -19,7 +19,6 @@
 <!ENTITY rfc5155 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
 <!ENTITY rfc5702 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5702.xml">
 <!ENTITY rfc5751 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
-<!ENTITY ICANNDPS PUBLIC "" "icann-dps-reference.xml">
 ]>
 
 <?rfc strict="yes" ?>
@@ -405,7 +404,18 @@
 
     <references title="Informative References">
       <reference anchor="DPS">
-        &ICANNDPS;
+        <front>
+          <title abbrev="Root Zone KSK Operator DPS">DNSSEC Practice Statement for the Root Zone KSK Operator</title>
+          <author fullname="Fredrik Ljunggren" initials="F." surname="Ljunggren">
+          </author>
+          <author fullname="Tomofumi Okubo" initials="T." surname="Okubo">
+          </author>
+          <author fullname="Richard Lamb" initials="R." surname="Lamb">
+          </author>
+          <author fullname="Jakob Schlyter" initials="J." surname="Schlyter">
+          </author>
+          <date day="21" month="May" year="2010" />
+        </front>
         <format type="TXT"
           target="https://www.iana.org/dnssec/icann-dps.txt" />
       </reference>
