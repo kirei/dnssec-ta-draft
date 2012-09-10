@@ -7,3 +7,9 @@ Authors:
 - Jakob Schlyter, Kirei
 - Joe Abley, ICANN
 - Guy Bailey, Microsoft
+
+
+
+Known implementations:
+
+- Microsoft Windows Server 2012
