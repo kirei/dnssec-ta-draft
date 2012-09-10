@@ -51,12 +51,6 @@
     <author fullname="Jakob Schlyter" initials="J." surname="Schlyter">
       <organization abbrev="Kirei">Kirei AB</organization>
       <address>
-        <postal>
-          <street>P.O. Box 53204</street>
-          <city>Goteborg</city>
-          <code>SE-400 16</code>
-          <country>Sweden</country>
-        </postal>
         <email>jakob@kirei.se</email>
       </address>
     </author>
