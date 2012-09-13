@@ -340,7 +340,7 @@
         IANA function. This document describes an initial set of
         publication mechanisms for trust anchors related to that
         management. In the future, additional publication schemes
-        may be also be made available, in which case they will be
+        may also be made available, in which case they will be
         described in a new document that updates this one.</t>
 
       <t>Existing mechanisms will not be deprecated without very
