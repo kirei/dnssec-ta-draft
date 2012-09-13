@@ -13,5 +13,5 @@ Authors:
 Known implementations:
 
 - Microsoft Windows Server 2012 -- http://www.microsoft.com/
-- Nomonum Vantio -- http://www.nominum.com/
+- Nominum Vantio -- http://www.nominum.com/
 - Unbound -- http://www.unbound.net/
