@@ -70,7 +70,7 @@
       </address>
     </author>
 
-    <date month="September" year="2012"/>
+    <date month="December" year="2012"/>
 
     <abstract>
       <t>The root zone of the Domain Name System (DNS) has been
@@ -401,12 +401,16 @@
         <front>
           <title abbrev="Root Zone KSK Operator DPS">DNSSEC Practice Statement for the Root Zone KSK Operator</title>
           <author fullname="Fredrik Ljunggren" initials="F." surname="Ljunggren">
+	    <organization>Kirei AB</organization>
           </author>
           <author fullname="Tomofumi Okubo" initials="T." surname="Okubo">
+      	    <organization>ICANN</organization>
           </author>
           <author fullname="Richard Lamb" initials="R." surname="Lamb">
+            	    <organization>ICANN</organization>
           </author>
           <author fullname="Jakob Schlyter" initials="J." surname="Schlyter">
+      	    <organization>Kirei AB</organization>
           </author>
           <date day="21" month="May" year="2010" />
         </front>
