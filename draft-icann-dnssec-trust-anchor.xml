@@ -7,7 +7,6 @@
 <!ENTITY rfc2616 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml">
 <!ENTITY rfc2818 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2818.xml">
 <!ENTITY rfc2986 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2986.xml">
-<!ENTITY rfc3280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3280.xml">
 <!ENTITY rfc3339 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml">
 <!ENTITY rfc4033 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4033.xml">
 <!ENTITY rfc4034 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4034.xml">
@@ -15,6 +14,7 @@
 <!ENTITY rfc4509 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4509.xml">
 <!ENTITY rfc4641 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4641.xml">
 <!ENTITY rfc4880 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4880.xml">
+<!ENTITY rfc5280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5280.xml">
 <!ENTITY rfc5011 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5011.xml">
 <!ENTITY rfc5155 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
 <!ENTITY rfc5702 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5702.xml">
@@ -287,7 +287,7 @@
           server, since doing so would reduce robustness of the
           implementation. It is suggested that the implementation configure
           the HTTP over TLS transport library to validate the certification
-          path against certificate revocation lists <xref target="RFC3280"/>,
+          path against certificate revocation lists <xref target="RFC5280"/>,
           and reject self-signed certificates and certification paths that do
           not terminate in a trusted certificate authority.</t>
 
@@ -382,7 +382,6 @@
       &rfc2616;
       &rfc2818;
       &rfc2986;
-      &rfc3280;
       &rfc3339;
       &rfc4033;
       &rfc4034;
@@ -391,6 +390,7 @@
       &rfc4641;
       &rfc4880;
       &rfc5011;
+      &rfc5280;
       &rfc5155;
       &rfc5702;
       &rfc5751;
