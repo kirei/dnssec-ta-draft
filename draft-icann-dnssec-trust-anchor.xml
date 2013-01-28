@@ -189,7 +189,7 @@
           &lt;http://data.iana.org/root-anchors/key-label.csr&gt;, with
           "key-label" replaced by the key label of the corresponding KSK.</t>
 
-        <t>The URL for retrieving the IANA-signed Certificate is
+        <t>The URL for retrieving a signed X.509 certificate is
           &lt;http://data.iana.org/root-anchors/key-label.crt&gt;,
           with "key-label" again replaced as described above.</t>
 
@@ -197,12 +197,12 @@
           <eref target="http://data.iana.org/root-anchors/root-anchors.xml"/>.</t>
 
         <t>The URL for a detached S/MIME <xref target="RFC5751"/> signature
-          for the current trust anchor set is <eref
+          for the current trust anchor set, in XML format, is <eref
           target="http://data.iana.org/root-anchors/root-anchors.p7s"
           />.</t>
 
         <t>The URL for a detached OpenPGP <xref target="RFC4880"/>
-          signature for the current trust anchor set is <eref
+          signature for the current trust anchor set, in XML format, is <eref
           target="http://data.iana.org/root-anchors/root-anchors.asc"
           />.</t>
       </section>
@@ -219,7 +219,7 @@
           with "key-label" replaced by the key label of the
           corresponding KSK.</t>
 
-        <t>The URL for retrieving the IANA-signed Certificate is
+        <t>The URL for retrieving a signed X.509 certificate is
           &lt;https://data.iana.org/root-anchors/key-label.crt&gt;,
           with "key-label" again replaced as described above.</t>
 
