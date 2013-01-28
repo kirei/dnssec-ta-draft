@@ -12,13 +12,13 @@
 <!ENTITY rfc4034 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4034.xml">
 <!ENTITY rfc4035 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4035.xml">
 <!ENTITY rfc4509 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4509.xml">
-<!ENTITY rfc4641 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4641.xml">
 <!ENTITY rfc4880 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4880.xml">
 <!ENTITY rfc5280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5280.xml">
 <!ENTITY rfc5011 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5011.xml">
 <!ENTITY rfc5155 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
 <!ENTITY rfc5702 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5702.xml">
 <!ENTITY rfc5751 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
+<!ENTITY rfc6781 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6781.xml">
 ]>
 
 <?rfc strict="yes" ?>
@@ -94,7 +94,7 @@
     target="RFC5155" /> and <xref target="RFC5702" />.</t>
 
       <t>A discussion of operational practices relating to DNSSEC can be found
-      in <xref target="RFC4641" />.</t>
+      in <xref target="RFC6781" />.</t>
 
       <t>In the DNSSEC protocol, resource record sets (RRSets) are signed
       cryptographically. This means that a response to a query contains
@@ -389,13 +389,13 @@
       &rfc4034;
       &rfc4035;
       &rfc4509;
-      &rfc4641;
       &rfc4880;
       &rfc5011;
       &rfc5280;
       &rfc5155;
       &rfc5702;
       &rfc5751;
+      &rfc6781;
     </references>
 
     <references title="Informative References">
