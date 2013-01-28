@@ -37,10 +37,10 @@
       <organization>ICANN</organization>
       <address>
         <postal>
-          <street>4676 Admiralty Way, Suite 330</street>
-          <city>Marina del Rey</city>
+          <street>12025 Waterfront Drive, Suite 300</street>
+          <city>Los Angeles</city>
           <region>CA</region>
-          <code>90292</code>
+          <code>90094-2536</code>
           <country>US</country>
         </postal>
         <phone>+1 519 670 9327</phone>
@@ -70,7 +70,7 @@
       </address>
     </author>
 
-    <date month="December" year="2012"/>
+    <date month="January" year="2013"/>
 
     <abstract>
       <t>The root zone of the Domain Name System (DNS) has been
