@@ -93,26 +93,28 @@
     target="RFC4035" />, <xref target="RFC4509" />, <xref
     target="RFC5155" /> and <xref target="RFC5702" />.</t>
 
-      <t>A discussion of operational practices relating to DNSSEC
-        can be found in <xref target="RFC4641" />.</t>
+      <t>A discussion of operational practices relating to DNSSEC can be found
+      in <xref target="RFC4641" />.</t>
 
-      <t>In DNSSEC resource record sets (RRSets) are cryptographically-signed,
-        such that a response to a query contains signatures which allow its
-        integrity and authenticity to be verified. An individual signature is
-        validated by following a chain of signatures to a key which is trusted
-        for some extra-protocol reason.</t>
+      <t>In the DNSSEC protocol, resource record sets (RRSets) are signed
+      cryptographically. This means that a response to a query contains
+      signatures that allow the integrity and authenticity of the RRSet to be
+      verified. Signatures are validated by following a chain of signatures to
+      a key called a "trust anchor". The reason for trusting such a key is
+      outside the DNSSEC protocol, but having one or more trust anchors is
+      required for the DNSSEC protocol to work.</t>
 
       <t>The publication of trust anchors for the root zone of the DNS is an
-        IANA function performed by ICANN. A detailed description of
-        corresponding key management practices can be found in <xref
-        target="DPS"/>, which can be retrieved from the IANA Repository
-        located at <eref target="https://www.iana.org/dnssec/"/>.</t>
+      IANA function performed by ICANN. A detailed description of corresponding
+      key management practices can be found in <xref target="DPS"/>, which can
+      be retrieved from the IANA Repository located at <eref
+      target="https://www.iana.org/dnssec/"/>.</t>
 
-      <t>This document describes the distribution of DNSSEC trust anchors.
-        Whilst the data formats and the publication and retrieval methods
-        described in this document might well be adapted for other uses, this
-        document's focus is more specific and is concerned only with the
-        distribution of trust anchors for the root zone.</t>
+      <t>This document describes the distribution of the DNSSEC trust anchors
+      from IANA. This document is concerned only with the distribution of trust
+      anchors for the root zone, although the data formats and the publication
+      and retrieval methods described here might can be adapted for other
+      uses.</t>
 
     </section>
 
