@@ -142,11 +142,11 @@
       <section title="XML" anchor="xml">
 
         <t>Trust anchors are published in an XML document whose schema is
-          described in <xref target="schema" />. The document contains a
-          complete set of trust anchors for the root zone, including anchors
-          suitable for immediate use and also historical data. Each trust
-          anchor optionally includes Uniform Resource Locators (URLs) for
-          retrieving corresponding X.509 certificates.</t>
+        described in <xref target="schema" />. The document contains a complete
+        set of trust anchors for the root zone, including anchors suitable for
+        immediate use and also historical data. Each trust anchor optionally
+        includes one or more Certificate elements, with Uniform Resource
+        Locators (URLs) for retrieving corresponding X.509 certificates.</t>
 
         <t>Examples of trust anchors packaged and signed for
           publication can be found in <xref target="examples" />.</t>
