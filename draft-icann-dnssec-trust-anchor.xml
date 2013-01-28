@@ -198,13 +198,11 @@
 
         <t>The URL for a detached S/MIME <xref target="RFC5751"/> signature
           for the current trust anchor set, in XML format, is <eref
-          target="http://data.iana.org/root-anchors/root-anchors.p7s"
-          />.</t>
+          target="http://data.iana.org/root-anchors/root-anchors.p7s"/>.</t>
 
         <t>The URL for a detached OpenPGP <xref target="RFC4880"/>
           signature for the current trust anchor set, in XML format, is <eref
-          target="http://data.iana.org/root-anchors/root-anchors.asc"
-          />.</t>
+          target="http://data.iana.org/root-anchors/root-anchors.asc"/>.</t>
       </section>
 
       <section title="HTTP Over TLS" anchor="HTTPOverTLS">
@@ -263,10 +261,12 @@
           widely, e.g.  to public PGP key servers.</t>
 
         <t>Certificates used to create S/MIME <xref target="RFC5751"/>
-          signatures will be signed by a Certificate Authority (CA)
-          administered by ICANN as the IANA functions operator and also
-          optionally by well-known (e.g. WebTrust-certified) CAs to facilitate
-          signature validation with widely-available X.509 trust anchors.</t>
+        signatures for the current trust anchor set, in XML format, are signed
+        by a Certificate Authority (CA) administered by ICANN as the IANA
+        functions operator and also optionally by well-known (e.g.
+        WebTrust-certified) CAs to facilitate signature validation with
+        widely-available X.509 trust anchors.</t>
+
       </section>
     </section>
 
