@@ -591,6 +591,18 @@ END
             schema to provide a mechanism for locating external
             X.509 certificates relating to a particular key.</t>
         </section>
+
+        <section title="draft-jabley-dnssec-trust-anchor-05">
+          <t>Update author address.</t>
+        </section>
+
+        <section title="draft-jabley-dnssec-trust-anchor-06">
+          <t>Update references.</t>
+        </section>
+
+        <section title="draft-jabley-dnssec-trust-anchor-07">
+          <t>Minor changes based on review by Paul Hoffman.</t>
+        </section>
       </section>
     </section>
   </back>
