@@ -131,10 +131,10 @@
              XML document, as described in <xref target="xml"/>, and</t>
 
            <t>as Certificate Signing Requests (CSRs) in PKCS#10 format <xref
-             target="RFC2986"/> for further processing by Certification
-             Authorities and validation of proof of possession of the
-             corresponding private keys, as described in <xref
-             target="pkcs10"/>.</t>
+           target="RFC2986"/> for further processing by other entities such as
+           Certification Authorities and validation of proof of possession of
+           the corresponding private keys, as described in <xref
+           target="pkcs10"/>.</t>
 
          </list>
        </t>
