@@ -26,7 +26,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
-<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-07"
+<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-08"
   ipr="trust200902">
 
   <front>
@@ -34,17 +34,17 @@
       Anchor Publication for the Root Zone</title>
 
     <author initials='J.' surname="Abley" fullname='Joe Abley'>
-      <organization>ICANN</organization>
+      <organization>Dyn, Inc.</organization>
       <address>
         <postal>
-          <street>12025 Waterfront Drive, Suite 300</street>
-          <city>Los Angeles</city>
-          <region>CA</region>
-          <code>90094-2536</code>
-          <country>US</country>
+          <street>470 Moore Street</street>
+          <city>London</city>
+          <region>ON</region>
+          <code>N6C 2C2</code>
+          <country>Canada</country>
         </postal>
         <phone>+1 519 670 9327</phone>
-        <email>joe.abley@icann.org</email>
+        <email>jabley@dyn.com</email>
       </address>
     </author>
 
@@ -70,7 +70,7 @@
       </address>
     </author>
 
-    <date month="June" year="2013"/>
+    <date month="December" year="2013"/>
 
     <abstract>
       <t>The root zone of the Domain Name System (DNS) has been
