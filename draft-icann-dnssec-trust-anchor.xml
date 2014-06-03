@@ -26,7 +26,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
-<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-08"
+<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-09"
   ipr="trust200902">
 
   <front>
@@ -70,7 +70,7 @@
       </address>
     </author>
 
-    <date month="December" year="2013"/>
+    <date month="June" year="2014"/>
 
     <abstract>
       <t>The root zone of the Domain Name System (DNS) has been
