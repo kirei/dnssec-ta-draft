@@ -26,7 +26,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
-<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-09"
+<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-10"
   ipr="trust200902">
 
   <front>
@@ -344,8 +344,9 @@
       <t>Existing mechanisms will not be deprecated without very
         strong technical justification.</t>
 
-      <t>This document contains information about an existing
-        service, and has no IANA actions.</t>
+      <t>This document serves as the reference for id-mod-dns-resource-record,
+      value 70, in the SMI Security for PKIX Module Identifier registry.</t>
+
     </section>
 
     <section title="Security Considerations">
