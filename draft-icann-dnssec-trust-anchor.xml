@@ -19,6 +19,7 @@
 <!ENTITY rfc5702 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5702.xml">
 <!ENTITY rfc5751 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
 <!ENTITY rfc6781 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6781.xml">
+<!ENTITY rfc6960 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6960.xml">
 ]>
 
 <?rfc strict="yes" ?>
@@ -26,7 +27,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
-<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-09"
+<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-10"
   ipr="trust200902">
 
   <front>
@@ -55,7 +56,7 @@
       </address>
     </author>
 
-    <author fullname="Guy Bailey" initials="G." surname="Bailey">
+    <author fullname="Guillaume Bailey" initials="G." surname="Bailey">
       <organization abbrev="Microsoft">Microsoft Corporation</organization>
       <address>
         <postal>
@@ -70,7 +71,7 @@
       </address>
     </author>
 
-    <date month="June" year="2014"/>
+    <date month="October" year="2014"/>
 
     <abstract>
       <t>The root zone of the Domain Name System (DNS) has been
@@ -112,9 +113,17 @@
       <t>This document describes the distribution of the DNSSEC trust anchors
       from IANA. This document is concerned only with the distribution of trust
       anchors for the root zone, although the data formats and the publication
-      and retrieval methods described here might can be adapted for other
-      uses.</t>
+      and retrieval methods described here can be adapted for other uses.</t>
 
+      <t>The protocol described in this document is not a substitute for the
+      automated DNSSEC trust anchor update protocol described in <xref target="RFC5011" />.
+      That protocol allows for secure in-band succession of trust anchors 
+      when trust has already been established. The protocol described in 
+      this document allows a trust anchor to initially be established 
+      out-of-band, possibly relying on trusted out-of-band authorities. Thus, 
+      this document and <xref target="RFC5011" /> are complimentary protocols.</t>
+
+      
     </section>
 
     <section title="Root Zone Trust Anchor Publication">
@@ -276,16 +285,17 @@
 
       <section title="HTTP Over TLS Transport">
         <t>The HTTP over TLS transport <xref target="RFC2818"/> is suggested
-          over the unencrypted HTTP transport <xref target="RFC2616"/> for
-          implementations using the XML-format root trust anchors, since the
+          instead of using the unencrypted HTTP transport <xref target="RFC2616"/> for
+          implementations that use the XML-format root trust anchors, since the
           latter transport does not provide authentication. It is not
           suggested that implementations restrict certification path
           validation of the HTTP over TLS transport session to the current or
           historical certificate authorities used by the root trust anchor
           server, since doing so would reduce robustness of the
           implementation. It is suggested that the implementation configure
-          the HTTP over TLS transport library to validate the certification
+          the HTTP over TLS transport library to: validate the certification
           path against certificate revocation lists <xref target="RFC5280"/>,
+          and/or with the online certificate status protocol <xref target="RFC6960"/>;
           and reject self-signed certificates and certification paths that do
           not terminate in a trusted certificate authority.</t>
 
@@ -352,9 +362,9 @@
     <section title="Security Considerations">
       <t>This document describes how DNSSEC trust anchors for the
         root zone of the DNS are published. It is to be expected
-        that many DNSSEC clients will only configure a single trust
-        anchor to perform validation, and that the trust anchor
-        they use will be that of the root zone. As a consequence,
+        that many DNSSEC clients will only configure a IANA-issued trust
+        anchors to perform validation, and that the trust anchors
+        they use will be those of the root zone. As a consequence,
         reliable publication of trust anchors is important.</t>
 
       <t>This document aims to specify carefully the means by which
@@ -392,6 +402,7 @@
       &rfc5155;
       &rfc5702;
       &rfc5751;
+      &rfc6960;
       &rfc6781;
     </references>
 
@@ -681,6 +692,11 @@ END
 
         <section title="draft-jabley-dnssec-trust-anchor-07">
           <t>Minor changes based on review by Paul Hoffman.</t>
+        </section>
+
+        <section title="draft-jabley-dnssec-trust-anchor-10">
+          <t>Incorporate additional suggestions by Paul Hoffman. 
+          Add consideration for OCSP to Implementation Considerations.</t>
         </section>
       </section>
     </section>
