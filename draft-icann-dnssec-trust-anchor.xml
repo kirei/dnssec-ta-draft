@@ -362,7 +362,7 @@
     <section title="Security Considerations">
       <t>This document describes how DNSSEC trust anchors for the
         root zone of the DNS are published. It is to be expected
-        that many DNSSEC clients will only configure a IANA-issued trust
+        that many DNSSEC clients will only configure IANA-issued trust
         anchors to perform validation, and that the trust anchors
         they use will be those of the root zone. As a consequence,
         reliable publication of trust anchors is important.</t>
