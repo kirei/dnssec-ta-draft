@@ -27,7 +27,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
-<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-10"
+<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-11"
   ipr="trust200902">
 
   <front>
@@ -698,6 +698,11 @@ END
           <t>Incorporate additional suggestions by Paul Hoffman. 
           Add consideration for OCSP to Implementation Considerations.</t>
         </section>
+
+        <section title="draft-jabley-dnssec-trust-anchor-11">
+          <t>Draft expired.</t>
+        </section>
+
       </section>
     </section>
   </back>
