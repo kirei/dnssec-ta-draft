@@ -27,7 +27,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
-<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-11"
+<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-12"
   ipr="trust200902">
 
   <front>
@@ -71,7 +71,7 @@
       </address>
     </author>
 
-    <date month="April" year="2015"/>
+    <date month="September" year="2015"/>
 
     <abstract>
       <t>The root zone of the Domain Name System (DNS) has been
@@ -700,6 +700,10 @@ END
         </section>
 
         <section title="draft-jabley-dnssec-trust-anchor-11">
+          <t>Draft expired.</t>
+        </section>
+
+        <section title="draft-jabley-dnssec-trust-anchor-12">
           <t>Draft expired.</t>
         </section>
 
