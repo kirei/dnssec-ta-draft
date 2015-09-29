@@ -121,7 +121,7 @@
       when trust has already been established. The protocol described in 
       this document allows a trust anchor to initially be established 
       out-of-band, possibly relying on trusted out-of-band authorities. Thus, 
-      this document and <xref target="RFC5011" /> are complimentary protocols.</t>
+      this document and <xref target="RFC5011" /> are complementary protocols.</t>
 
       
     </section>
