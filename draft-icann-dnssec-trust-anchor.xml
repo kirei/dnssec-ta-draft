@@ -71,7 +71,14 @@
       </address>
     </author>
 
-    <date month="September" year="2015"/>
+    <author fullname="Edward Lewis" initials="E." surname="Lewis">
+      <organization abbrev="ICANN">Internet Corporation For Assigned Names and Numbers</organization>
+      <address>
+        <email>edward.lewis@icann.org</email>
+      </address>
+    </author>
+
+    <date month="October" year="2015"/>
 
     <abstract>
       <t>The root zone of the Domain Name System (DNS) has been
