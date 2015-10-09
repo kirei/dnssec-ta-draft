@@ -11,6 +11,7 @@ Authors:
 - Jakob Schlyter, Kirei
 - Joe Abley, ICANN
 - Guy Bailey, Microsoft
+- Ed Lewis, ICANN
 
 
 
