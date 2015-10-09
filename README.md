@@ -9,7 +9,7 @@ in this draft) at https://data.iana.org/root-anchors/root-anchors.xml.
 Authors:
 
 - Jakob Schlyter, Kirei
-- Joe Abley, ICANN
+- Joe Abley, Dyn
 - Guy Bailey, Microsoft
 - Ed Lewis, ICANN
 
