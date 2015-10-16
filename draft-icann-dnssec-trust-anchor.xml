@@ -27,7 +27,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
-<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-12"
+<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-13"
   ipr="trust200902">
 
   <front>
@@ -57,17 +57,8 @@
     </author>
 
     <author fullname="Guillaume Bailey" initials="G." surname="Bailey">
-      <organization abbrev="Microsoft">Microsoft Corporation</organization>
       <address>
-        <postal>
-          <street>One Microsoft Way</street>
-          <city>Redmond</city>
-          <region>WA</region>
-          <code>98052</code>
-          <country>US</country>
-        </postal>
-        <phone>+1 425 538 6153 x86153</phone>
-        <email>gubailey@microsoft.com</email>
+        <email>GuillaumeBailey@outlook.com</email>
       </address>
     </author>
 
@@ -712,6 +703,10 @@ END
 
         <section title="draft-jabley-dnssec-trust-anchor-12">
           <t>Draft expired.</t>
+        </section>
+
+        <section title="draft-jabley-dnssec-trust-anchor-13">
+          <t>Update author address and affiliation.</t>
         </section>
 
       </section>
