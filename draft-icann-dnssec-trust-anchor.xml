@@ -65,6 +65,14 @@
     <author fullname="Edward Lewis" initials="E." surname="Lewis">
       <organization abbrev="ICANN">Internet Corporation For Assigned Names and Numbers</organization>
       <address>
+        <postal>
+          <street>801 17th Street NW, suite 400</street>
+          <city>Washington</city>
+          <region>DC</region>
+          <code>20006</code>
+          <country>US</country>
+        </postal>
+        <phone>+1 310 463 1153</phone>
         <email>edward.lewis@icann.org</email>
       </address>
     </author>
