@@ -143,9 +143,7 @@
         <t>Trust anchors are published in an XML document whose schema is
         described in <xref target="schema" />. The document contains a complete
         set of trust anchors for the root zone, including anchors suitable for
-        immediate use and also historical data. Each trust anchor optionally
-        includes one or more Certificate elements, with Uniform Resource
-        Locators (URLs) for retrieving corresponding X.509 certificates.</t>
+        immediate use and also historical data.</t>
 
         <t>Examples of trust anchors packaged and signed for
           publication can be found in <xref target="examples" />.</t>
@@ -530,12 +528,7 @@ keydigest = element KeyDigest {
             xsd:nonNegativeInteger { maxInclusive = "255" } },
     element DigestType {
             xsd:nonNegativeInteger { maxInclusive = "255" } },
-    element Digest { xsd:hexBinary },
-
-    element Certificate {
-            attribute source { xsd:string },
-            empty
-    }+
+    element Digest { xsd:hexBinary }
 }
 ]]>
        </artwork>
@@ -573,10 +566,6 @@ keydigest = element KeyDigest {
         <Algorithm>5</Algorithm>
         <DigestType>1</DigestType>
         <Digest>a3cf809dbdbc835716ba22bdc370d2efa50f21c7</Digest>
-        <Certificate
-          source="http://data.iana.org/root-anchors/Kexample1.crt"/>
-        <Certificate
-          source="http://data.iana.org/root-anchors/Kexample2.crt"/>
     </KeyDigest>
 
 </TrustAnchor>
@@ -700,6 +689,8 @@ END
 
         <section title="draft-jabley-dnssec-trust-anchor-13">
           <t>Update author address and affiliation.</t>
+          <t>Removed the &lt;Certificate&gt; element from the XML
+            schema.</t>
         </section>
 
       </section>
