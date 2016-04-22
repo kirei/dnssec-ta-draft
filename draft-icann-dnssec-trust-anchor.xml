@@ -62,7 +62,14 @@
       </address>
     </author>
 
-    <date month="January" year="2016"/>
+    <author fullname="Paul Hoffman" initials="P." surname="Hoffman">
+      <organization abbrev="Kirei">ICANN</organization>
+      <address>
+        <email>paul.hoffman@icann.org</email>
+      </address>
+    </author>
+
+    <date />
 
     <abstract>
       <t>The root zone of the Domain Name System (DNS) has been
@@ -367,8 +374,8 @@
         in the root zone of the DNS, and the authors hereby acknowledge
         their substantial collective contribution.</t>
 
-      <t>This document incorporates suggestions made by Paul Hoffman
-        and Alfred Hoenes, whose contributions are appreciated.</t>
+      <t>This document incorporates suggestions made by
+        Alfred Hoenes, whose contributions are appreciated.</t>
     </section>
 
   </middle>
@@ -396,7 +403,8 @@
     </references>
 
     <references title="Informative References">
-      <reference anchor="DPS">
+      <reference anchor="DPS"
+             target="https://www.iana.org/dnssec/icann-dps.txt">
         <front>
           <title abbrev="Root Zone KSK Operator DPS">DNSSEC Practice Statement for the Root Zone KSK Operator</title>
           <author fullname="Fredrik Ljunggren" initials="F." surname="Ljunggren">
@@ -411,10 +419,8 @@
           <author fullname="Jakob Schlyter" initials="J." surname="Schlyter">
       	    <organization>Kirei AB</organization>
           </author>
-          <date day="21" month="May" year="2010" />
+          <date month="October" year="2010" />
         </front>
-        <format type="TXT"
-          target="https://www.iana.org/dnssec/icann-dps.txt" />
       </reference>
 
       <reference anchor="root-anchors"
