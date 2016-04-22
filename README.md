@@ -11,7 +11,6 @@ Authors:
 - Jakob Schlyter, Kirei
 - Joe Abley, Dyn
 - Guy Bailey, Microsoft
-- Ed Lewis, ICANN
 
 
 
