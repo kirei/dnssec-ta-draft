@@ -183,34 +183,17 @@
     </section>
 
     <section anchor="mechanisms" title="Root Zone Trust Anchor Retrieval">
-      <section title="HTTP" anchor="http">
-        <t>Trust anchors are available for retrieval using HTTP.</t>
+ 
+     <section title="Retrieving Trust Anchors with HTTPS and HTTP">
 
-        <t>The URL for retrieving the CSR is
-          &lt;http://data.iana.org/root-anchors/key-label.csr&gt;, with
-          "key-label" replaced by the key label of the corresponding KSK.</t>
+        <t>Trust anchors are available for retrieval using HTTPS and HTTP.
+          If the system retrieving the trust anchors trusts the CA that IANA
+          uses for the "data.icann.org" web server, HTTPS SHOULD be used
+          instead of HTTP. Currently, that CA is well-known, that is, one that
+          is a WebTrust-accredited Certificate Authority.</t>
 
-        <t>The URL for retrieving a signed X.509 certificate is
-          &lt;http://data.iana.org/root-anchors/key-label.crt&gt;,
-          with "key-label" again replaced as described above.</t>
-
-        <t>The URL for retrieving the complete trust anchor set is
-          &lt;http://data.iana.org/root-anchors/root-anchors.xml&gt;.</t>
-
-        <t>The URL for a detached CMS <xref target="RFC5652"/> signature
-          for the current trust anchor set, in XML format, is
-          &lt;http://data.iana.org/root-anchors/root-anchors.p7s&gt;.</t>
-
-        <t>The URL for a detached OpenPGP <xref target="RFC4880"/>
-          signature for the current trust anchor set, in XML format, is
-          &lt;http://data.iana.org/root-anchors/root-anchors.asc&gt;.</t>
-      </section>
-
-      <section title="HTTP Over TLS" anchor="HTTPOverTLS">
-        <t>Trust anchors are available for retrieval using HTTP over TLS.</t>
-
-        <t>The URLs specified in <xref target="http"/> are also
-          available using HTTPS. That is:</t>
+        <t>In this section, all URLs are given using the "https:" scheme. If
+          HTTPS cannot be used, replace the "https:" scheme with "http:".</t>
 
         <t>The URL for retrieving the CSR is
           &lt;https://data.iana.org/root-anchors/key-label.csr&gt;,
@@ -231,13 +214,6 @@
         <t>The URL for a detached OpenPGP <xref target="RFC4880"/>
           signature for the current trust anchor set is
 	      &lt;https://data.iana.org/root-anchors/root-anchors.asc&gt;.</t>
-
-    <t>TLS sessions are authenticated with certificates presented from the
-      server. No client certificate verification is performed. The certificate
-      presented by the server is chosen such that it can be trusted using an
-      X.509 trust anchor that is believed to be well-known, e.g. one that
-      corresponds to a WebTrust-accredited Certificate Authority. Other TLS
-      authentication mechanisms may be considered in the future.</t>
 
       </section>
 
@@ -293,8 +269,7 @@
 
         <t>Implementations can allow configuration of the URL used
           to retrieve the root trust anchor resources, but it is
-          suggested that the default configuration use the URLs
-          specified in <xref target="HTTPOverTLS"/>.</t>
+          suggested that the default configuration use the "https:" URL scheme.</t>
       </section>
 
       <section title="XML Validation">
