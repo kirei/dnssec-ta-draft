@@ -4,8 +4,6 @@
 "http://xml.resource.org/authoring/rfc2629.dtd" [
 <!ENTITY rfc1034 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1034.xml">
 <!ENTITY rfc1035 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1035.xml">
-<!ENTITY rfc2616 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml">
-<!ENTITY rfc2818 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2818.xml">
 <!ENTITY rfc2986 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2986.xml">
 <!ENTITY rfc3339 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml">
 <!ENTITY rfc4033 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4033.xml">
@@ -186,8 +184,7 @@
 
     <section anchor="mechanisms" title="Root Zone Trust Anchor Retrieval">
       <section title="HTTP" anchor="http">
-        <t>Trust anchors are available for retrieval using HTTP <xref
-          target="RFC2616" />.</t>
+        <t>Trust anchors are available for retrieval using HTTP.</t>
 
         <t>The URL for retrieving the CSR is
           &lt;http://data.iana.org/root-anchors/key-label.csr&gt;, with
@@ -210,8 +207,7 @@
       </section>
 
       <section title="HTTP Over TLS" anchor="HTTPOverTLS">
-        <t>Trust anchors are available for retrieval using HTTP over TLS
-          <xref target="RFC2818" />.</t>
+        <t>Trust anchors are available for retrieval using HTTP over TLS.</t>
 
         <t>The URLs specified in <xref target="http"/> are also
           available using HTTPS. That is:</t>
@@ -280,8 +276,8 @@
         ensure robustness, usability and secure operation.</t>
 
       <section title="HTTP Over TLS Transport">
-        <t>The HTTP over TLS transport <xref target="RFC2818"/> is suggested
-          instead of using the unencrypted HTTP transport <xref target="RFC2616"/> for
+        <t>The HTTP over TLS transport is suggested
+          instead of using the unencrypted HTTP transport for
           implementations that use the XML-format root trust anchors, since the
           latter transport does not provide authentication. It is not
           suggested that implementations restrict certification path
@@ -384,8 +380,6 @@
     <references title="Normative References">
       &rfc1034;
       &rfc1035;
-      &rfc2616;
-      &rfc2818;
       &rfc2986;
       &rfc3339;
       &rfc4033;
