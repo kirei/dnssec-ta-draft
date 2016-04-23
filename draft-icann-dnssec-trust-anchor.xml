@@ -73,7 +73,7 @@
       <t>In order to obtain secure answers from the root zone of the
         DNS using DNSSEC, a client must configure a suitable trust
         anchor.  This document describes how such trust anchors are
-        published.</t>
+        currently formatted and published by IANA.</t>
     </abstract>
   </front>
 
@@ -103,10 +103,11 @@
       be retrieved from the IANA Repository <xref target="IANA-DNSSEC-INFO"/>.</t>
 
       <t>This document describes the formats and distribution methods of DNSSEC trust anchors
-      by IANA for the root zone of the DNS. Other organizations might have
+      currently used by IANA for the root zone of the DNS. Other organizations might have
       different formats and mechansims for distributing DNSSEC trust anchors
       for the root zone; however, most operators and software vendors have
-      chosen to rely on the IANA trust anchors.</t>
+      chosen to rely on the IANA trust anchors.
+      IANA may change the formats and distribution methods in the future.</t>
 
       <t>The formats and distribution methods described in this document are
       a complement to, not a substitute for, the
