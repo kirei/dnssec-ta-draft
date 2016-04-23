@@ -14,8 +14,8 @@
 <!ENTITY rfc5280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5280.xml">
 <!ENTITY rfc5011 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5011.xml">
 <!ENTITY rfc5155 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
+<!ENTITY rfc5652 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5652.xml">
 <!ENTITY rfc5702 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5702.xml">
-<!ENTITY rfc5751 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
 <!ENTITY rfc6781 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6781.xml">
 <!ENTITY rfc6960 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6960.xml">
 ]>
@@ -48,7 +48,7 @@
     </author>
 
     <author fullname="Jakob Schlyter" initials="J." surname="Schlyter">
-      <organization abbrev="Kirei">Kirei AB</organization>
+      <organization>Kirei AB</organization>
       <address>
         <email>jakob@kirei.se</email>
       </address>
@@ -61,7 +61,7 @@
     </author>
 
     <author fullname="Paul Hoffman" initials="P." surname="Hoffman">
-      <organization abbrev="Kirei">ICANN</organization>
+      <organization>ICANN</organization>
       <address>
         <email>paul.hoffman@icann.org</email>
       </address>
@@ -104,7 +104,7 @@
       <t>The publication of trust anchors for the root zone of the DNS is an
       IANA function performed by ICANN. A detailed description of corresponding
       key management practices can be found in <xref target="DPS"/>, which can
-      be retrieved from the IANA Repository <xref target="IANA-DNSSEC-INFO"/>.</t>
+      be retrieved from the IANA Repository at &lt;https://www.iana.org/dnssec/&gt;.</t>
 
       <t>This document describes the distribution of the DNSSEC trust anchors
       from IANA. This document is concerned only with the distribution of trust
@@ -194,16 +194,16 @@
           &lt;http://data.iana.org/root-anchors/key-label.crt&gt;,
           with "key-label" again replaced as described above.</t>
 
-        <t>The URL for retrieving the complete trust anchor set is available
-	  from <xref target="TA-HTTP-XML"/>.</t>
+        <t>The URL for retrieving the complete trust anchor set is
+          &lt;http://data.iana.org/root-anchors/root-anchors.xml&gt;.</t>
 
-        <t>The URL for a detached S/MIME <xref target="RFC5751"/> signature
-          for the current trust anchor set, in XML format, is available from
-	  <xref target="TA-HTTP-SMIME"/>.</t>
+        <t>The URL for a detached CMS <xref target="RFC5652"/> signature
+          for the current trust anchor set, in XML format, is
+          &lt;http://data.iana.org/root-anchors/root-anchors.p7s&gt;.</t>
 
         <t>The URL for a detached OpenPGP <xref target="RFC4880"/>
           signature for the current trust anchor set, in XML format, is
-          available from <xref target="TA-HTTP-PGP"/>.</t>
+          &lt;http://data.iana.org/root-anchors/root-anchors.asc&gt;.</t>
       </section>
 
       <section title="HTTP Over TLS" anchor="HTTPOverTLS">
@@ -222,15 +222,15 @@
           with "key-label" again replaced as described above.</t>
 
         <t>The URL for retrieving the complete trust anchor set
-     	   available from <xref target="TA-HTTPS-XML"/>.</t>
+     	   is &lt;https://data.iana.org/root-anchors/root-anchors.xml&gt;.</t>
 
-        <t>The URL for a detached S/MIME <xref target="RFC5751"/> signature
-          for the current trust anchor set is available from
-	  <xref target="TA-HTTPS-SMIME"/>.</t>
+        <t>The URL for a detached CMS <xref target="RFC5652"/> signature
+          for the current trust anchor set is 
+          &lt;https://data.iana.org/root-anchors/root-anchors.p7s&gt;.</t>
 
         <t>The URL for a detached OpenPGP <xref target="RFC4880"/>
-          signature for the current trust anchor set is available from
-	  <xref target="TA-HTTPS-PGP"/>.</t>
+          signature for the current trust anchor set is
+	      &lt;https://data.iana.org/root-anchors/root-anchors.asc&gt;.</t>
 
     <t>TLS sessions are authenticated with certificates presented from the
       server. No client certificate verification is performed. The certificate
@@ -253,11 +253,11 @@
           PGP keys.</t>
 
         <t>An OpenPGP keyring containing public keys pertinent to
-          signature verification is published at <xref target="ICANN-PGP"/>.
+          signature verification is published at &lt;http://data.iana.org/root-anchors/icann.pgp&gt;.
           The public keys on that keyring will also be distributed
           widely, e.g. to public PGP key servers.</t>
 
-        <t>Certificates used to create S/MIME <xref target="RFC5751"/>
+        <t>Certificates used to create CMS <xref target="RFC5652"/>
         signatures for the current trust anchor set, in XML format, are signed
         by a Certificate Authority (CA) administered by ICANN as the IANA
         functions operator and also optionally by well-known (e.g.
@@ -390,13 +390,14 @@
       &rfc5011;
       &rfc5280;
       &rfc5155;
+      &rfc5652;
       &rfc5702;
-      &rfc5751;
       &rfc6960;
       &rfc6781;
     </references>
 
     <references title="Informative References">
+
       <reference anchor="DPS"
              target="https://www.iana.org/dnssec/icann-dps.txt">
         <front>
@@ -414,87 +415,6 @@
       	    <organization>Kirei AB</organization>
           </author>
           <date month="October" year="2010" />
-        </front>
-      </reference>
-
-      <reference anchor="root-anchors"
-	         target="https://data.iana.org/root-anchors/root-anchors.xml">
-        <front>
-          <title>DNSSEC Trust Anchors</title>
-          <author/>
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="IANA-DNSSEC-INFO"
-	         target="https://www.iana.org/dnssec/">
-        <front>
-          <title>IANA DNSSEC Information</title>
-          <author/>
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="ICANN-PGP"
-	         target="http://data.iana.org/root-anchors/icann.pgp">
-        <front>
-          <title>ICANN PGP Keys</title>
-          <author/>
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="TA-HTTP-XML"
-	         target="http://data.iana.org/root-anchors/root-anchors.xml">
-        <front>
-          <title>Root DNSSEC Trust Anchors (XML)</title>
-          <author/>
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="TA-HTTPS-XML"
-	         target="https://data.iana.org/root-anchors/root-anchors.xml">
-        <front>
-          <title>Root DNSSEC Trust Anchors (XML)</title>
-          <author/>
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="TA-HTTP-PGP"
-	         target="http://data.iana.org/root-anchors/root-anchors.asc">
-        <front>
-          <title>Root DNSSEC Trust Anchors (OpenPGP)</title>
-          <author/>
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="TA-HTTPS-PGP"
-	         target="https://data.iana.org/root-anchors/root-anchors.asc">
-        <front>
-          <title>Root DNSSEC Trust Anchors (OpenPGP)</title>
-          <author/>
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="TA-HTTP-SMIME"
-	         target="http://data.iana.org/root-anchors/root-anchors.p7s">
-        <front>
-          <title>Root DNSSEC Trust Anchors (S/MIME)</title>
-          <author/>
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="TA-HTTPS-SMIME"
-	         target="https://data.iana.org/root-anchors/root-anchors.p7s">
-        <front>
-          <title>Root DNSSEC Trust Anchors (S/MIME)</title>
-          <author/>
-          <date/>
         </front>
       </reference>
 
@@ -538,7 +458,7 @@ keydigest = element KeyDigest {
     <section anchor="examples" title="Example Signed Trust Anchor Set">
       <t><xref target="eg1"/> describes two trust anchors for the
         root zone such as might be retrieved from
-	<xref target="root-anchors"/>.</t>
+	    &lt;http://data.iana.org/root-anchors/root-anchors.xml&gt;.</t>
 	
       <figure anchor="eg1">
         <artwork>
