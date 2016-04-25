@@ -10,8 +10,8 @@ Authors:
 
 - Jakob Schlyter, Kirei
 - Joe Abley, Dyn
-- Guy Bailey, Microsoft
-
+- Guy Bailey
+- Paul Hoffman, ICANN
 
 
 Known implementations:
