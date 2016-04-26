@@ -147,50 +147,135 @@ from IANA into a DS RR can do so.</t>
 interpreted as described in <xref target='RFC2119'/>.</t>
 
 </section>
-
       
     </section>
 
-    <section title="IANA DNSSEC Root Zone Trust Anchor Formats" anchor="ta_formats">
+    <section title="IANA DNSSEC Root Zone Trust Anchor Formats and Semantics" anchor="ta_formats">
 
-      <t>Trust anchors for the root zone are published in two formats,
-        each of which is described in this document:
+      <t>IANA publishes trust anchors for the root zone in two formats:
 
          <list style="symbols">
 
-           <t>as the hashes of the corresponding DNSKEY records, consistent
-             with the defined presentation format of Delegation Signer (DS)
-             resource records <xref target="RFC4034"/>, contained within an
-             XML document, as described in <xref target="xml"/>, and</t>
+           <t>an XML document that contains the hashes of the DNSKEY records</t>
 
-           <t>as Certificate Signing Requests (CSRs) in PKCS#10 format <xref
-           target="RFC2986"/> for further processing by other entities such as
-           Certification Authorities and validation of proof of possession of
-           the corresponding private keys, as described in <xref
-           target="pkcs10"/>.</t>
+           <t>Certificate Signing Requests (CSRs) in PKCS#10 format <xref
+           target="RFC2986"/> that contain DS records and the full public key
+           of DNSKEY records</t>
 
          </list>
+       These two formats and the semantics associated with each are described in
+       the rest of this section.
        </t>
 
-      <section title="XML" anchor="xml">
+       <t>***** Need to think about the CER as a trust anchor ******</t>
 
-        <t>Trust anchors are published in an XML document whose schema is
-        described in <xref target="schema" />. The document contains a complete
-        set of trust anchors for the root zone, including anchors suitable for
-        immediate use and also historical data.</t>
+      <section title="Hashes in XML" anchor="hashes_in_xml">
 
-        <t>Examples of trust anchors packaged and signed for
-          publication can be found in <xref target="examples" />.</t>
+        <t>The XML document contains a set of hashes for the DNSKEY records
+          that can be used to validate the root zone. The hashes are
+          consistent with the defined presentation format of Delegation Signer (DS)
+          resource records from <xref target="RFC4034"/>.</t>
+
+        <section title="XML Syntax" anchor="xml_syntax">
+
+          <t>A Relax NG Compact Schema for the documents used to publish
+            trust anchors can be found in <xref target="schemafig"/>.</t>
+
+          <figure anchor="schemafig">
+            <artwork>
+<![CDATA[
+datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
+
+start = element TrustAnchor {
+    attribute id { xsd:string },
+    attribute source { xsd:string },
+    element Zone { xsd:string },
+
+    keydigest+
+}
+
+keydigest = element KeyDigest {
+    attribute id { xsd:string },
+    attribute validFrom { xsd:dateTime },
+    attribute validUntil { xsd:dateTime }?,
+
+    element KeyTag {
+            xsd:nonNegativeInteger { maxInclusive = "65535" } },
+    element Algorithm {
+            xsd:nonNegativeInteger { maxInclusive = "255" } },
+    element DigestType {
+            xsd:nonNegativeInteger { maxInclusive = "255" } },
+    element Digest { xsd:hexBinary }
+}
+]]>
+           </artwork>
+          </figure>
+
+        </section>
+
+        <section title="XML Semantics" anchor="xml_semantics">
+
+           <t>****** A full list of semantics, including MUSTs and SHOULDs,
+           will go here *******</t>
+
+        </section>
+
+        <section title="Converting from XML to DS Records" anchor="xml_to_ds">
+
+           <t>****** A step-by-step way of going from a XML record to a DS
+           will go here *******</t>
+
+        </section>
+
+        <section title="XML Example" anchor="xml_example">
+
+          <t><xref target="eg1"/> describes two trust anchors for the
+            root zone such as might be retrieved from
+	        &lt;http://data.iana.org/root-anchors/root-anchors.xml&gt;.</t>
+
+          <figure anchor="eg1">
+            <artwork>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TrustAnchor
+    id="AD42165F-B099-4778-8F42-D34A1D41FD93"
+    source="http://data.iana.org/root-anchors/root-anchors.xml">
+
+    <Zone>.</Zone>
+
+    <KeyDigest id="42"
+               validFrom="2010-07-01T00:00:00-00:00"
+               validUntil="2010-08-01T00:00:00-00:00">
+        <KeyTag>34291</KeyTag>
+        <Algorithm>5</Algorithm>
+        <DigestType>1</DigestType>
+        <Digest>c8cb3d7fe518835490af8029c23efbce6b6ef3e2</Digest>
+    </KeyDigest>
+
+    <KeyDigest id="53"
+               validFrom="2010-08-01T00:00:00-00:00">
+        <KeyTag>12345</KeyTag>
+        <Algorithm>5</Algorithm>
+        <DigestType>1</DigestType>
+        <Digest>a3cf809dbdbc835716ba22bdc370d2efa50f21c7</Digest>
+    </KeyDigest>
+
+</TrustAnchor>
+]]>
+            </artwork>
+          </figure>
+
+        </section>
       </section>
 
-      <section title="Certificate Signing Request (PKCS#10)" anchor="pkcs10">
+      <section title="Certificate Signing Requests" anchor="csrs">
 
-        <t>To facilitate signing the trust anchor by a public key
-          infrastructure, trust anchors are also published as
+        <t>Each public key that can be used as a trust anchor is represented as a
           Certificate Signing Requests (CSRs) in <xref
           target="RFC2986">PKCS#10 format</xref>.</t>
 
-        <t>Each CSR will have a Subject with following attributes:
+        <t>Each CSR will have a Subject field with following attributes:
           <list style="hanging">
             <t hangText="O:">the string "ICANN".</t>
 
@@ -198,15 +283,53 @@ interpreted as described in <xref target='RFC2119'/>.</t>
 
             <t hangText="CN:">the string "Root Zone KSK" followed
               by the time and date of key generation in the format
-              specified in <xref target="RFC3339"/>,
-              e.g. "Root Zone KSK 2010-06-16T21:19:24+00:00".</t>
+              specified in <xref target="RFC3339"/>.
+              For example, a CN might be "Root Zone KSK 2010-06-16T21:19:24+00:00".</t>
 
             <t hangText="resourceRecord:">the hash of the public
               key consistent with the presentation format of the
               Delegation Signer (DS) <xref target="RFC4034"/>
-              resource record (see <xref
-              target="asn1-rr"/> for attribute definition).</t>
+              resource record.</t>
           </list>
+        </t>
+
+        <t>The "resourceRecord" attribute is defined as follows:
+
+          <figure>
+            <artwork>
+<![CDATA[
+ResourceRecord
+  { iso(1) identified-organization(3) dod(6) internet(1) security(5)
+    mechanisms(5) pkix(7) id-mod(0) id-mod-dns-resource-record(70) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+-- EXPORTS ALL --
+
+IMPORTS
+
+caseIgnoreMatch FROM SelectedAttributeTypes
+    { joint-iso-itu-t ds(5) module(1) selectedAttributeTypes(5) 4 }
+
+;
+
+iana OBJECT IDENTIFIER ::= { iso(1) identified-organization(3)
+    dod(6) internet(1) private(4) enterprise(1) 1000 }
+
+iana-dns OBJECT IDENTIFIER ::= { iana 53 }
+
+resourceRecord ATTRIBUTE ::= {
+    WITH SYNTAX IA5String
+    EQUALITY MATCHING RULE caseIgnoreIA5Match
+    ID iana-dns
+}
+
+END
+]]>
+           </artwork>
+          </figure>
         </t>
       </section>
     </section>
@@ -424,118 +547,6 @@ interpreted as described in <xref target='RFC2119'/>.</t>
       </reference>
 
     </references>
-
-    <section anchor="schema" title="Trust Anchor Publication Document Schema">
-      <t>A Relax NG Compact Schema for the documents used to publish
-        trust anchors can be found in <xref target="schemafig"/>.</t>
-
-      <figure anchor="schemafig">
-        <artwork>
-<![CDATA[
-datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
-
-start = element TrustAnchor {
-    attribute id { xsd:string },
-    attribute source { xsd:string },
-    element Zone { xsd:string },
-
-    keydigest+
-}
-
-keydigest = element KeyDigest {
-    attribute id { xsd:string },
-    attribute validFrom { xsd:dateTime },
-    attribute validUntil { xsd:dateTime }?,
-
-    element KeyTag {
-            xsd:nonNegativeInteger { maxInclusive = "65535" } },
-    element Algorithm {
-            xsd:nonNegativeInteger { maxInclusive = "255" } },
-    element DigestType {
-            xsd:nonNegativeInteger { maxInclusive = "255" } },
-    element Digest { xsd:hexBinary }
-}
-]]>
-       </artwork>
-      </figure>
-    </section>
-
-    <section anchor="examples" title="Example Signed Trust Anchor Set">
-      <t><xref target="eg1"/> describes two trust anchors for the
-        root zone such as might be retrieved from
-	    &lt;http://data.iana.org/root-anchors/root-anchors.xml&gt;.</t>
-	
-      <figure anchor="eg1">
-        <artwork>
-<![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-
-<TrustAnchor
-    id="AD42165F-B099-4778-8F42-D34A1D41FD93"
-    source="http://data.iana.org/root-anchors/root-anchors.xml">
-
-    <Zone>.</Zone>
-
-    <KeyDigest id="42"
-               validFrom="2010-07-01T00:00:00-00:00"
-               validUntil="2010-08-01T00:00:00-00:00">
-        <KeyTag>34291</KeyTag>
-        <Algorithm>5</Algorithm>
-        <DigestType>1</DigestType>
-        <Digest>c8cb3d7fe518835490af8029c23efbce6b6ef3e2</Digest>
-    </KeyDigest>
-
-    <KeyDigest id="53"
-               validFrom="2010-08-01T00:00:00-00:00">
-        <KeyTag>12345</KeyTag>
-        <Algorithm>5</Algorithm>
-        <DigestType>1</DigestType>
-        <Digest>a3cf809dbdbc835716ba22bdc370d2efa50f21c7</Digest>
-    </KeyDigest>
-
-</TrustAnchor>
-]]>
-        </artwork>
-      </figure>
-    </section>
-
-    <section anchor="asn1-rr" title="ASN.1 Module for DNS Resource Record">
-      <figure>
-        <artwork>
-<![CDATA[
-ResourceRecord
-  { iso(1) identified-organization(3) dod(6) internet(1) security(5)
-    mechanisms(5) pkix(7) id-mod(0) id-mod-dns-resource-record(70) }
-
-DEFINITIONS IMPLICIT TAGS ::=
-
-BEGIN
-
--- EXPORTS ALL --
-
-IMPORTS
-
-caseIgnoreMatch FROM SelectedAttributeTypes
-    { joint-iso-itu-t ds(5) module(1) selectedAttributeTypes(5) 4 }
-
-;
-
-iana OBJECT IDENTIFIER ::= { iso(1) identified-organization(3)
-    dod(6) internet(1) private(4) enterprise(1) 1000 }
-
-iana-dns OBJECT IDENTIFIER ::= { iana 53 }
-
-resourceRecord ATTRIBUTE ::= {
-    WITH SYNTAX IA5String
-    EQUALITY MATCHING RULE caseIgnoreIA5Match
-    ID iana-dns
-}
-
-END
-]]>
-       </artwork>
-      </figure>
-    </section>
 
     <section title="Historical Note">
       <t>The first KSK for use in the root zone of the DNS was
