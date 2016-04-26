@@ -179,7 +179,7 @@ interpreted as described in <xref target='RFC2119'/>.</t>
         <section title="XML Syntax" anchor="xml_syntax">
 
           <t>A Relax NG Compact Schema for the documents used to publish
-            trust anchors can be found in <xref target="schemafig"/>.</t>
+            trust anchors is given in <xref target="schemafig"/>.</t>
 
           <figure anchor="schemafig">
             <artwork>
@@ -215,23 +215,110 @@ keydigest = element KeyDigest {
 
         <section title="XML Semantics" anchor="xml_semantics">
 
-           <t>****** A full list of semantics, including MUSTs and SHOULDs,
-           will go here *******</t>
+<t>The TrustAnchor element is the container for all of the trust anchors in the
+file.</t>
+
+<t>The id attribute in the TrustAnchor element is an opaque string that identifies
+the set of trust anchors. Its value has no particular semantics.
+Note that the id element in the TrustAnchor element is different than the id
+element in the KeyDigest element, described below.</t>
+
+<t>The source attribute in the TrustAnchor element gives information about where
+to obtain the TrustAnchor container. It is likely to be a URL, and is advisory only.</t>
+
+<t>The Zone element in the TrustAnchor element states to which DNS zone this container
+applies. The root zone is indicated by a single period (.) character, without any
+quotation marks.</t>
+
+<t>The TrustAnchor element contains one or more KeyDigest elements. Each KeyDigest
+element represents the digest of a DNSKEY record in the zone defined in the
+Zone element.</t>
+
+<t>The id attribute in the KeyDigest element is an opaque string that identifies
+the hash. Its value is used in the file names and URI of the other trust anchor
+formats. This is described in <xref target="https_and_http"/>.
+For example, if the value of the id attribute in the KeyDigest element
+is "Kjqmt7v", the URI for the CSR that is associated with this hash will be
+&lt;https://data.iana.org/root-anchors/Kjqmt7v.csr&gt;.
+Note that the id element in the KeyDigest element is different than the id
+element in the TrustAnchor element, described above.</t>
+
+<t>The validFrom and validUntil attributes in the KeyDigest element specify
+the range of times that the KeyDigest element can be used as a trust anchor.
+Note that the KeyDigest element is optional; if it is not given, the
+trust anchor can be used until a KeyDigest element covering the same
+DNSKEY record but having a validUntil attribute is trusted by the relying party.
+Relying parties SHOULD NOT use a KeyDigest outside of the time range given
+in the validFrom and validUntil attributes.</t>
+
+<t>The KeyTag element in the KeyDigest element contains the key tag for the
+DNSKEY record represented in this KeyDigest.</t> 
+
+<t>The Algorithm element in the KeyDigest element contains the signing algorithm
+identifier for the DNSKEY record represented in this KeyDigest.</t> 
+
+<t>The DigestType element in the KeyDigest element contains the digest algorithm
+identifier for the DNSKEY record represented in this KeyDigest.</t> 
+
+<t>The Digest element in the KeyDigest element contains the hexadecimal
+representation of the hash for the DNSKEY record represented in this KeyDigest.</t>
 
         </section>
 
         <section title="Converting from XML to DS Records" anchor="xml_to_ds">
 
-           <t>****** A step-by-step way of going from a XML record to a DS
-           will go here *******</t>
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<TrustAnchor id="AD42165F-3B1A-4778-8F42-D34A1D41FD93" source="http://data.iana.org/root-anchors/root-anchors.xml">
+<Zone>.</Zone>
+<KeyDigest id="Kjqmt7v" validFrom="2010-07-15T00:00:00+00:00">
+<KeyTag>19036</KeyTag>
+<Algorithm>8</Algorithm>
+<DigestType>2</DigestType>
+<Digest>49AAC11D7B6F6446702E54A1607371607A1A41855200FD2CE1CDDE32F24E8FB5</Digest>
+</KeyDigest>
+</TrustAnchor>
+
+. IN DS 19036 8 2 49AAC11D7B6F6446702E54A1607371607A1A41855200FD2CE1CDDE32F24E8FB5
+
+-->
+
+<t>The display format for the DS record that is the equivalent of a KeyDigest element can be constructed
+by marshaling the KeyTag, Algorithm, DigestType, and Digest elements. For example, assume that the TrustAnchor
+element contains:
+<figure><artwork>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<TrustAnchor
+   id="AD42165F-3B1A-4778-8F42-D34A1D41FD93"
+   source="http://data.iana.org/root-anchors/root-anchors.xml">
+<Zone>.</Zone>
+<KeyDigest id="Kjqmt7v" validFrom="2010-07-15T00:00:00+00:00">
+<KeyTag>19036</KeyTag>
+<Algorithm>8</Algorithm>
+<DigestType>2</DigestType>
+<Digest>
+49AAC11D7B6F6446702E54A1607371607A1A41855200FD2CE1CDDE32F24E8FB5
+</Digest>
+</KeyDigest>
+</TrustAnchor>
+]]>
+</artwork></figure>
+
+The DS record would be:
+<figure><artwork>
+<![CDATA[
+. IN DS 19036 8 2
+   49AAC11D7B6F6446702E54A1607371607A1A41855200FD2CE1CDDE32F24E8FB5
+]]>
+</artwork></figure></t>
 
         </section>
 
         <section title="XML Example" anchor="xml_example">
 
-          <t><xref target="eg1"/> describes two trust anchors for the
-            root zone such as might be retrieved from
-	        &lt;http://data.iana.org/root-anchors/root-anchors.xml&gt;.</t>
+          <t><xref target="eg1"/> describes two fictitious trust anchors for the
+            root zone.</t>
 
           <figure anchor="eg1">
             <artwork>
@@ -336,7 +423,7 @@ END
 
     <section anchor="mechanisms" title="Root Zone Trust Anchor Retrieval">
  
-     <section title="Retrieving Trust Anchors with HTTPS and HTTP">
+     <section title="Retrieving Trust Anchors with HTTPS and HTTP" anchor="https_and_http">
 
         <t>Trust anchors are available for retrieval using HTTPS and HTTP.
           If the system retrieving the trust anchors trusts the CA that IANA
