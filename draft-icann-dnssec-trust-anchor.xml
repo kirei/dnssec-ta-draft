@@ -152,22 +152,25 @@ interpreted as described in <xref target='RFC2119'/>.</t>
 
     <section title="IANA DNSSEC Root Zone Trust Anchor Formats and Semantics" anchor="ta_formats">
 
-      <t>IANA publishes trust anchors for the root zone in two formats:
+      <t>IANA publishes trust anchors for the root zone in three formats:
 
          <list style="symbols">
 
            <t>an XML document that contains the hashes of the DNSKEY records</t>
 
-           <t>Certificate Signing Requests (CSRs) in PKCS#10 format <xref
+           <t>certificates in PKIX format <xref target="RFC5280"/>
+           that contain DS records and the full public key
+           of DNSKEY records</t>
+
+           <t>certificate signing requests (CSRs) in PKCS#10 format <xref
            target="RFC2986"/> that contain DS records and the full public key
            of DNSKEY records</t>
 
          </list>
-       These two formats and the semantics associated with each are described in
+
+       These formats and the semantics associated with each are described in
        the rest of this section.
        </t>
-
-       <t>***** Need to think about the CER as a trust anchor ******</t>
 
       <section title="Hashes in XML" anchor="hashes_in_xml">
 
@@ -179,7 +182,7 @@ interpreted as described in <xref target='RFC2119'/>.</t>
         <section title="XML Syntax" anchor="xml_syntax">
 
           <t>A Relax NG Compact Schema for the documents used to publish
-            trust anchors can be found in <xref target="schemafig"/>.</t>
+            trust anchors is given in <xref target="schemafig"/>.</t>
 
           <figure anchor="schemafig">
             <artwork>
@@ -215,23 +218,94 @@ keydigest = element KeyDigest {
 
         <section title="XML Semantics" anchor="xml_semantics">
 
-           <t>****** A full list of semantics, including MUSTs and SHOULDs,
-           will go here *******</t>
+<t>The TrustAnchor element is the container for all of the trust anchors in the
+file.</t>
+
+<t>The id attribute in the TrustAnchor element is an opaque string that identifies
+the set of trust anchors. Its value has no particular semantics.
+Note that the id element in the TrustAnchor element is different than the id
+element in the KeyDigest element, described below.</t>
+
+<t>The source attribute in the TrustAnchor element gives information about where
+to obtain the TrustAnchor container. It is likely to be a URL, and is advisory only.</t>
+
+<t>The Zone element in the TrustAnchor element states to which DNS zone this container
+applies. The root zone is indicated by a single period (.) character, without any
+quotation marks.</t>
+
+<t>The TrustAnchor element contains one or more KeyDigest elements. Each KeyDigest
+element represents the digest of a DNSKEY record in the zone defined in the
+Zone element.</t>
+
+<t>The id attribute in the KeyDigest element is an opaque string that identifies
+the hash. Its value is used in the file names and URI of the other trust anchor
+formats. This is described in <xref target="https_and_http"/>.
+For example, if the value of the id attribute in the KeyDigest element
+is "Kjqmt7v", the URI for the CSR that is associated with this hash will be
+&lt;https://data.iana.org/root-anchors/Kjqmt7v.csr&gt;.
+Note that the id element in the KeyDigest element is different than the id
+element in the TrustAnchor element, described above.</t>
+
+<t>The validFrom and validUntil attributes in the KeyDigest element specify
+the range of times that the KeyDigest element can be used as a trust anchor.
+Note that the KeyDigest element is optional; if it is not given, the
+trust anchor can be used until a KeyDigest element covering the same
+DNSKEY record but having a validUntil attribute is trusted by the relying party.
+Relying parties SHOULD NOT use a KeyDigest outside of the time range given
+in the validFrom and validUntil attributes.</t>
+
+<t>The KeyTag element in the KeyDigest element contains the key tag for the
+DNSKEY record represented in this KeyDigest.</t> 
+
+<t>The Algorithm element in the KeyDigest element contains the signing algorithm
+identifier for the DNSKEY record represented in this KeyDigest.</t> 
+
+<t>The DigestType element in the KeyDigest element contains the digest algorithm
+identifier for the DNSKEY record represented in this KeyDigest.</t> 
+
+<t>The Digest element in the KeyDigest element contains the hexadecimal
+representation of the hash for the DNSKEY record represented in this KeyDigest.</t>
 
         </section>
 
         <section title="Converting from XML to DS Records" anchor="xml_to_ds">
 
-           <t>****** A step-by-step way of going from a XML record to a DS
-           will go here *******</t>
+<t>The display format for the DS record that is the equivalent of a KeyDigest element can be constructed
+by marshaling the KeyTag, Algorithm, DigestType, and Digest elements. For example, assume that the TrustAnchor
+element contains:
+<figure><artwork>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<TrustAnchor
+   id="AD42165F-3B1A-4778-8F42-D34A1D41FD93"
+   source="http://data.iana.org/root-anchors/root-anchors.xml">
+<Zone>.</Zone>
+<KeyDigest id="Kjqmt7v" validFrom="2010-07-15T00:00:00+00:00">
+<KeyTag>19036</KeyTag>
+<Algorithm>8</Algorithm>
+<DigestType>2</DigestType>
+<Digest>
+49AAC11D7B6F6446702E54A1607371607A1A41855200FD2CE1CDDE32F24E8FB5
+</Digest>
+</KeyDigest>
+</TrustAnchor>
+]]>
+</artwork></figure>
+
+The DS record would be:
+<figure><artwork>
+<![CDATA[
+. IN DS 19036 8 2
+   49AAC11D7B6F6446702E54A1607371607A1A41855200FD2CE1CDDE32F24E8FB5
+]]>
+</artwork></figure></t>
 
         </section>
 
         <section title="XML Example" anchor="xml_example">
 
-          <t><xref target="eg1"/> describes two trust anchors for the
-            root zone such as might be retrieved from
-	        &lt;http://data.iana.org/root-anchors/root-anchors.xml&gt;.</t>
+          <t><xref target="eg1"/> describes two fictitious trust anchors for the
+            root zone.</t>
 
           <figure anchor="eg1">
             <artwork>
@@ -241,9 +315,7 @@ keydigest = element KeyDigest {
 <TrustAnchor
     id="AD42165F-B099-4778-8F42-D34A1D41FD93"
     source="http://data.iana.org/root-anchors/root-anchors.xml">
-
     <Zone>.</Zone>
-
     <KeyDigest id="42"
                validFrom="2010-07-01T00:00:00-00:00"
                validUntil="2010-08-01T00:00:00-00:00">
@@ -252,7 +324,6 @@ keydigest = element KeyDigest {
         <DigestType>1</DigestType>
         <Digest>c8cb3d7fe518835490af8029c23efbce6b6ef3e2</Digest>
     </KeyDigest>
-
     <KeyDigest id="53"
                validFrom="2010-08-01T00:00:00-00:00">
         <KeyTag>12345</KeyTag>
@@ -260,7 +331,6 @@ keydigest = element KeyDigest {
         <DigestType>1</DigestType>
         <Digest>a3cf809dbdbc835716ba22bdc370d2efa50f21c7</Digest>
     </KeyDigest>
-
 </TrustAnchor>
 ]]>
             </artwork>
@@ -269,13 +339,14 @@ keydigest = element KeyDigest {
         </section>
       </section>
 
-      <section title="Certificate Signing Requests" anchor="csrs">
+      <section title="Certificates" anchor="certs">
 
-        <t>Each public key that can be used as a trust anchor is represented as a
-          Certificate Signing Requests (CSRs) in <xref
-          target="RFC2986">PKCS#10 format</xref>.</t>
+         <t>Each public key that can be used as a trust anchor is represented as a
+          certificate in PKIX format. Each certificate is signed by the ICANN
+          certificate authority. The SubjectPublicKeyInfo in the certificate
+          represents the public key of the KSK.
+          The Subject field has the following attributes:
 
-        <t>Each CSR will have a Subject field with following attributes:
           <list style="hanging">
             <t hangText="O:">the string "ICANN".</t>
 
@@ -286,14 +357,14 @@ keydigest = element KeyDigest {
               specified in <xref target="RFC3339"/>.
               For example, a CN might be "Root Zone KSK 2010-06-16T21:19:24+00:00".</t>
 
-            <t hangText="resourceRecord:">the hash of the public
-              key consistent with the presentation format of the
+            <t hangText="resourceRecord:">a string in
+              the presentation format of the
               Delegation Signer (DS) <xref target="RFC4034"/>
-              resource record.</t>
+              resource record for the DNSSEC public key.</t>
           </list>
         </t>
 
-        <t>The "resourceRecord" attribute is defined as follows:
+        <t>The "resourceRecord" attribute in the Subject is defined as follows:
 
           <figure>
             <artwork>
@@ -331,12 +402,21 @@ END
            </artwork>
           </figure>
         </t>
+     </section>
+
+      <section title="Certificate Signing Requests" anchor="csrs">
+
+        <t>Each public key that can be used as a trust anchor is represented as a
+          certificate signing request in PKCS#10 format. The SubjectPublicKeyInfo
+          and Subject field are the same as for certificates
+          (see <xref target="certs"/> above).</t>
+
       </section>
     </section>
 
     <section anchor="mechanisms" title="Root Zone Trust Anchor Retrieval">
  
-     <section title="Retrieving Trust Anchors with HTTPS and HTTP">
+     <section title="Retrieving Trust Anchors with HTTPS and HTTP" anchor="https_and_http">
 
         <t>Trust anchors are available for retrieval using HTTPS and HTTP.
           If the system retrieving the trust anchors trusts the CA that IANA
