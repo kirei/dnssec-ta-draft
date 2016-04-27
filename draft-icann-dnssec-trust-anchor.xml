@@ -152,22 +152,25 @@ interpreted as described in <xref target='RFC2119'/>.</t>
 
     <section title="IANA DNSSEC Root Zone Trust Anchor Formats and Semantics" anchor="ta_formats">
 
-      <t>IANA publishes trust anchors for the root zone in two formats:
+      <t>IANA publishes trust anchors for the root zone in three formats:
 
          <list style="symbols">
 
            <t>an XML document that contains the hashes of the DNSKEY records</t>
 
-           <t>Certificate Signing Requests (CSRs) in PKCS#10 format <xref
+           <t>certificates in PKIX format <xref target="RFC5280"/>
+           that contain DS records and the full public key
+           of DNSKEY records</t>
+
+           <t>certificate signing requests (CSRs) in PKCS#10 format <xref
            target="RFC2986"/> that contain DS records and the full public key
            of DNSKEY records</t>
 
          </list>
-       These two formats and the semantics associated with each are described in
+
+       These formats and the semantics associated with each are described in
        the rest of this section.
        </t>
-
-       <t>***** Need to think about the CER as a trust anchor ******</t>
 
       <section title="Hashes in XML" anchor="hashes_in_xml">
 
@@ -267,22 +270,6 @@ representation of the hash for the DNSKEY record represented in this KeyDigest.<
 
         <section title="Converting from XML to DS Records" anchor="xml_to_ds">
 
-<!--
-<?xml version="1.0" encoding="UTF-8"?>
-<TrustAnchor id="AD42165F-3B1A-4778-8F42-D34A1D41FD93" source="http://data.iana.org/root-anchors/root-anchors.xml">
-<Zone>.</Zone>
-<KeyDigest id="Kjqmt7v" validFrom="2010-07-15T00:00:00+00:00">
-<KeyTag>19036</KeyTag>
-<Algorithm>8</Algorithm>
-<DigestType>2</DigestType>
-<Digest>49AAC11D7B6F6446702E54A1607371607A1A41855200FD2CE1CDDE32F24E8FB5</Digest>
-</KeyDigest>
-</TrustAnchor>
-
-. IN DS 19036 8 2 49AAC11D7B6F6446702E54A1607371607A1A41855200FD2CE1CDDE32F24E8FB5
-
--->
-
 <t>The display format for the DS record that is the equivalent of a KeyDigest element can be constructed
 by marshaling the KeyTag, Algorithm, DigestType, and Digest elements. For example, assume that the TrustAnchor
 element contains:
@@ -328,9 +315,7 @@ The DS record would be:
 <TrustAnchor
     id="AD42165F-B099-4778-8F42-D34A1D41FD93"
     source="http://data.iana.org/root-anchors/root-anchors.xml">
-
     <Zone>.</Zone>
-
     <KeyDigest id="42"
                validFrom="2010-07-01T00:00:00-00:00"
                validUntil="2010-08-01T00:00:00-00:00">
@@ -339,7 +324,6 @@ The DS record would be:
         <DigestType>1</DigestType>
         <Digest>c8cb3d7fe518835490af8029c23efbce6b6ef3e2</Digest>
     </KeyDigest>
-
     <KeyDigest id="53"
                validFrom="2010-08-01T00:00:00-00:00">
         <KeyTag>12345</KeyTag>
@@ -347,7 +331,6 @@ The DS record would be:
         <DigestType>1</DigestType>
         <Digest>a3cf809dbdbc835716ba22bdc370d2efa50f21c7</Digest>
     </KeyDigest>
-
 </TrustAnchor>
 ]]>
             </artwork>
@@ -356,13 +339,14 @@ The DS record would be:
         </section>
       </section>
 
-      <section title="Certificate Signing Requests" anchor="csrs">
+      <section title="Certificates" anchor="certs">
 
-        <t>Each public key that can be used as a trust anchor is represented as a
-          Certificate Signing Requests (CSRs) in <xref
-          target="RFC2986">PKCS#10 format</xref>.</t>
+         <t>Each public key that can be used as a trust anchor is represented as a
+          certificate in PKIX format. Each certificate is signed by the ICANN
+          certificate authority. The SubjectPublicKeyInfo in the certificate
+          represents the public key of the KSK.
+          The Subject field has the following attributes:
 
-        <t>Each CSR will have a Subject field with following attributes:
           <list style="hanging">
             <t hangText="O:">the string "ICANN".</t>
 
@@ -373,14 +357,14 @@ The DS record would be:
               specified in <xref target="RFC3339"/>.
               For example, a CN might be "Root Zone KSK 2010-06-16T21:19:24+00:00".</t>
 
-            <t hangText="resourceRecord:">the hash of the public
-              key consistent with the presentation format of the
+            <t hangText="resourceRecord:">a string in
+              the presentation format of the
               Delegation Signer (DS) <xref target="RFC4034"/>
-              resource record.</t>
+              resource record for the DNSSEC public key.</t>
           </list>
         </t>
 
-        <t>The "resourceRecord" attribute is defined as follows:
+        <t>The "resourceRecord" attribute in the Subject is defined as follows:
 
           <figure>
             <artwork>
@@ -418,6 +402,15 @@ END
            </artwork>
           </figure>
         </t>
+     </section>
+
+      <section title="Certificate Signing Requests" anchor="csrs">
+
+        <t>Each public key that can be used as a trust anchor is represented as a
+          certificate signing request in PKCS#10 format. The SubjectPublicKeyInfo
+          and Subject field are the same as for certificates
+          (see <xref target="certs"/> above).</t>
+
       </section>
     </section>
 
