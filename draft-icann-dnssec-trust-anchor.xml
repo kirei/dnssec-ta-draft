@@ -11,14 +11,12 @@
 <!ENTITY rfc4034 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4034.xml">
 <!ENTITY rfc4035 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4035.xml">
 <!ENTITY rfc4509 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4509.xml">
-<!ENTITY rfc4880 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4880.xml">
 <!ENTITY rfc5280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5280.xml">
 <!ENTITY rfc5011 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5011.xml">
 <!ENTITY rfc5155 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
 <!ENTITY rfc5652 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5652.xml">
 <!ENTITY rfc5702 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5702.xml">
 <!ENTITY rfc6781 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6781.xml">
-<!ENTITY rfc6960 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6960.xml">
 ]>
 
 <?rfc strict="yes" ?>
@@ -98,7 +96,7 @@
       <t>In the DNSSEC protocol, resource record sets (RRSets) are signed
       cryptographically. This means that a response to a query contains
       signatures that allow the integrity and authenticity of the RRSet to be
-      verified. Signatures are validated by following a chain of signatures to
+      verified. DNSSEC signatures are validated by following a chain of signatures to
       a "trust anchor". The reason for trusting a trust anchor is
       outside the DNSSEC protocol, but having one or more trust anchors is
       required for the DNSSEC protocol to work.</t>
@@ -407,7 +405,7 @@ END
       <section title="Certificate Signing Requests" anchor="csrs">
 
         <t>Each public key that can be used as a trust anchor is represented as a
-          certificate signing request in PKCS#10 format. The SubjectPublicKeyInfo
+          certificate signing request (CSR) in PKCS#10 format. The SubjectPublicKeyInfo
           and Subject field are the same as for certificates
           (see <xref target="certs"/> above).</t>
 
@@ -419,128 +417,56 @@ END
      <section title="Retrieving Trust Anchors with HTTPS and HTTP" anchor="https_and_http">
 
         <t>Trust anchors are available for retrieval using HTTPS and HTTP.
-          If the system retrieving the trust anchors trusts the CA that IANA
-          uses for the "data.icann.org" web server, HTTPS SHOULD be used
-          instead of HTTP. Currently, that CA is well-known, that is, one that
-          is a WebTrust-accredited Certificate Authority.</t>
+          </t>
 
         <t>In this section, all URLs are given using the "https:" scheme. If
           HTTPS cannot be used, replace the "https:" scheme with "http:".</t>
 
-        <t>The URL for retrieving the CSR is
-          &lt;https://data.iana.org/root-anchors/key-label.csr&gt;,
-          with "key-label" replaced by the key label of the
-          corresponding KSK.</t>
-
-        <t>The URL for retrieving a signed X.509 certificate is
-          &lt;https://data.iana.org/root-anchors/key-label.crt&gt;,
-          with "key-label" again replaced as described above.</t>
-
-        <t>The URL for retrieving the complete trust anchor set
+        <t>The URL for retrieving the set of hashes described in <xref target="hashes_in_xml"/>
      	   is &lt;https://data.iana.org/root-anchors/root-anchors.xml&gt;.</t>
 
-        <t>The URL for a detached CMS <xref target="RFC5652"/> signature
-          for the current trust anchor set is 
-          &lt;https://data.iana.org/root-anchors/root-anchors.p7s&gt;.</t>
+        <t>The URL for retrieving the PKIX certificate described in <xref target="certs"/> is
+          &lt;https://data.iana.org/root-anchors/KEYDIGEST-ID.crt&gt;,
+          with the string "KEYDIGEST-ID" replaced the "id" attribute from the KeyDigest element
+          from the XML file, as described in <xref target="xml_semantics"/>.</t>
 
-        <t>The URL for a detached OpenPGP <xref target="RFC4880"/>
-          signature for the current trust anchor set is
-	      &lt;https://data.iana.org/root-anchors/root-anchors.asc&gt;.</t>
-
-      </section>
-
-      <section title="Signature Verification" anchor="sigs">
-
-        <t>The OpenPGP <xref target="RFC4880"/> keys used to sign trust anchor
-          documents carry signatures from personal keys of staff who are able
-          to personally attest to their validity. Those staff members will
-          continue to make their personal keys freely available for
-          examination by third parties, e.g. by way of PGP key parties at
-          operator and IETF meetings. In this fashion a diverse set of paths
-          through the PGP web of trust will be maintained to the trust anchor
-          PGP keys.</t>
-
-        <t>An OpenPGP keyring containing public keys pertinent to
-          signature verification is published at &lt;http://data.iana.org/root-anchors/icann.pgp&gt;.
-          The public keys on that keyring will also be distributed
-          widely, e.g. to public PGP key servers.</t>
-
-        <t>Certificates used to create CMS <xref target="RFC5652"/>
-        signatures for the current trust anchor set, in XML format, are signed
-        by a Certificate Authority (CA) administered by ICANN as the IANA
-        functions operator and also optionally by well-known (e.g.
-        WebTrust-certified) CAs to facilitate signature validation with
-        widely-available X.509 trust anchors.</t>
+        <t>The URL for retrieving the CSR  described in <xref target="csrs"/> is
+          &lt;https://data.iana.org/root-anchors/KEYDIGEST-ID.csr&gt;,
+          with the string "KEYDIGEST-ID" replaced the "id" attribute from the KeyDigest element
+          from the XML file, as described in <xref target="xml_semantics"/>.</t>
 
       </section>
-    </section>
+   </section>
 
-    <section title="Implementation Considerations">
-      <t>Note: This non-normative section gives suggestions for
-        implementing root zone trust anchor retrieval.</t>
+<section title="Accepting DNSSEC Trust Anchors" anchor="trusting_anchors">
 
-      <t>Root trust anchor retrieval by the HTTP or HTTP over TLS
-        transports has several implementation considerations to
-        ensure robustness, usability and secure operation.</t>
+<t>A validator operator can choose whether or not to accept the trust anchors
+described in this document using whatever policy they want. In order to help
+validator operators verify the content and origin of trust anchors they
+receive, IANA uses digital signatures that chain to an ICANN-controlled CA over
+the trust anchor data.</t>
 
-      <section title="HTTP Over TLS Transport">
-        <t>The HTTP over TLS transport is suggested
-          instead of using the unencrypted HTTP transport for
-          implementations that use the XML-format root trust anchors, since the
-          latter transport does not provide authentication. It is not
-          suggested that implementations restrict certification path
-          validation of the HTTP over TLS transport session to the current or
-          historical certificate authorities used by the root trust anchor
-          server, since doing so would reduce robustness of the
-          implementation. It is suggested that the implementation configure
-          the HTTP over TLS transport library to: validate the certification
-          path against certificate revocation lists <xref target="RFC5280"/>,
-          and/or with the online certificate status protocol <xref target="RFC6960"/>;
-          and reject self-signed certificates and certification paths that do
-          not terminate in a trusted certificate authority.</t>
+<t>It is important to note that the ICANN CA is not a DNSSEC trust anchor.
+Instead, it is an optional mechanism for verifying the content and origin of
+the XML and certificate trust anchors. It is also important to note that the
+ICANN CA cannot be used to verify the origin of the trust anchor in the CSR
+format.</t>
 
-        <t>Implementations can allow configuration of the URL used
-          to retrieve the root trust anchor resources, but it is
-          suggested that the default configuration use the "https:" URL scheme.</t>
-      </section>
+<t>The content and origin of the XML file can be verified using
+a digital signature on the file. IANA provides a detached CMS <xref
+target="RFC5652"/> that chains to the ICANN CA with the XML file. The URL for a
+detached CMS signature for the XML file is
+&lt;https://data.iana.org/root-anchors/root-anchors.p7s&gt;.</t>
 
-      <section title="XML Validation">
-        <t>Implementations may perform strict validation of the
-          retrieved XML document against the XML schema; however,
-          such an implementation would not be robust against future
-          changes in the XML schema. It is suggested that the
-          implementation perform "loose" validation, where unknown
-          attributes and elements are ignored. This suggestion
-          allows for future additions to the XML schema without
-          affecting existing implementations.</t>
-      </section>
+<t>Another method IANA uses to help validator operators verify the content and
+origin of trust anchors they receive is to use the TLS protocol for distributing
+the trust anchors. Currently, the CA used for data.iana.org is well-known, that
+is, one that is a WebTrust-accredited Certificate Authority. If a system
+retrieving the trust anchors trusts the CA that IANA uses for the
+"data.iana.org" web server, HTTPS SHOULD be used instead of HTTP in order to
+have assurance of data origin.</t>
 
-      <section title="Trust Anchor Validation">
-        <t>The implementation can ignore trust anchors for which
-          the Algorithm or DigestType elements refer to an unknown,
-          or unsupported algorithm. Additionally, trust anchors for
-          which the Algorithm or DigestType elements refer to a
-          deprecated algorithm can be ignored, provided that this
-          suggestion does not cause all trust anchors to be
-          ignored. Further, note that these suggestions may not
-          apply where an implementation shares trust anchors
-          between many DNS validating resolvers, since the set of
-          supported algorithms may vary between resolvers, and
-          could possibly be disjoint.</t>
-
-        <t>The implementation can also ignore a trust anchor when
-          the validUntil time, if present, is in the past. If the
-          implementation also supports automated updates of trust
-          anchors <xref target="RFC5011"/>, it can ignore trust
-          anchors where the current time subtracted from the
-          validFrom time, if present, is greater than the add-hold
-          down time <xref target="RFC5011"/> for the trust
-          point.</t>
-
-        <t>The implementation can reject any trust anchor for a
-        trust point other than the root zone.</t>
-      </section>
-    </section>
+</section>
 
     <section title="IANA Considerations">
       <t>Key Signing Key (KSK) management for the root zone is an
@@ -550,20 +476,17 @@ END
         may also be made available, in which case they will be
         described in a new document that updates this one.</t>
 
-      <t>Existing mechanisms will not be deprecated without very
-        strong technical justification.</t>
-
-      <t>This document serves as the reference for id-mod-dns-resource-record,
+      <t><xref target="certs"/> serves as the reference for id-mod-dns-resource-record,
       value 70, in the SMI Security for PKIX Module Identifier registry.</t>
 
     </section>
 
     <section title="Security Considerations">
       <t>This document describes how DNSSEC trust anchors for the
-        root zone of the DNS are published. It is to be expected
-        that many DNSSEC clients will only configure IANA-issued trust
-        anchors to perform validation, and that the trust anchors
-        they use will be those of the root zone. As a consequence,
+        root zone of the DNS are published.
+        Many DNSSEC clients will only configure IANA-issued trust
+        anchors for the DNS root to perform validation.
+        As a consequence,
         reliable publication of trust anchors is important.</t>
 
       <t>This document aims to specify carefully the means by which
@@ -594,13 +517,11 @@ END
       &rfc4034;
       &rfc4035;
       &rfc4509;
-      &rfc4880;
       &rfc5011;
       &rfc5280;
       &rfc5155;
       &rfc5652;
       &rfc5702;
-      &rfc6960;
       &rfc6781;
     </references>
 
