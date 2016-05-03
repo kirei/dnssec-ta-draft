@@ -24,7 +24,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
-<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-13"
+<rfc category="info" docName="draft-jabley-dnssec-trust-anchor-pre14"
   ipr="trust200902">
 
   <front>
@@ -78,6 +78,14 @@
         DNS using DNSSEC, a client must configure a suitable trust
         anchor.  This document describes how such trust anchors are
         currently formatted and published by IANA.</t>
+
+<t>TODO BEFORE PUBLICATION:
+<list>
+
+<t>Jakob wants to put back the discussion of what might be deprecated in the future</t>
+
+</list></t>
+
     </abstract>
   </front>
 
