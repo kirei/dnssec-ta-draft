@@ -76,15 +76,8 @@
 
       <t>In order to obtain secure answers from the root zone of the
         DNS using DNSSEC, a client must configure a suitable trust
-        anchor.  This document describes how such trust anchors are
-        currently formatted and published by IANA.</t>
-
-<t>TODO BEFORE PUBLICATION:
-<list>
-
-<t>Jakob wants to put back the discussion of what might be deprecated in the future</t>
-
-</list></t>
+        anchor.  This document describes the format and publication
+        mechanisms IANA has used to distribute the DNSSEC trust anchors.</t>
 
     </abstract>
   </front>
@@ -115,11 +108,15 @@
       be retrieved from the IANA Repository at &lt;https://www.iana.org/dnssec/&gt;.</t>
 
       <t>This document describes the formats and distribution methods of DNSSEC trust anchors
-      currently used by IANA for the root zone of the DNS. Other organizations might have
+      that have been used by IANA for the root zone of the DNS since 2010. Other organizations might have
       different formats and mechansims for distributing DNSSEC trust anchors
       for the root zone; however, most operators and software vendors have
-      chosen to rely on the IANA trust anchors.
-      IANA may change the formats and distribution methods in the future.</t>
+      chosen to rely on the IANA trust anchors.</t>
+
+      <t>IMPORTANT NOTE: at the time of this writing, IANA
+      intends to change the formats and distribution methods in the future.
+      If such a change happens, IANA will publish the changes on its web site
+      at &lt;https://www.iana.org/dnssec/files&gt;.</t>
 
       <t>The formats and distribution methods described in this document are
       a complement to, not a substitute for, the
@@ -582,63 +579,6 @@ have assurance of data origin.</t>
         <t>The authors also welcome feedback sent to them directly.</t>
       </section>
 
-      <section title="Document History">
-        <section title="draft-jabley-dnssec-trust-anchor-00">
-          <t>This document is based on earlier documentation used
-            within and published by the team responsible for DNSSEC
-            deployment in the root zone. This is the first revision
-            circulated with the intention of publication in the RFC
-            series.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-01">
-          <t>Incorporated initial community suggestions. Editorial
-            improvements. Allocate OID and clean up syntax of ASN.1
-            module.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-02">
-          <t>Draft expired.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-04">
-          <t>Added the optional &lt;Certificate&gt; element to the XML
-            schema to provide a mechanism for locating external
-            X.509 certificates relating to a particular key.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-05">
-          <t>Update author address.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-06">
-          <t>Update references.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-07">
-          <t>Minor changes based on review by Paul Hoffman.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-10">
-          <t>Incorporate additional suggestions by Paul Hoffman. 
-          Add consideration for OCSP to Implementation Considerations.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-11">
-          <t>Draft expired.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-12">
-          <t>Draft expired.</t>
-        </section>
-
-        <section title="draft-jabley-dnssec-trust-anchor-13">
-          <t>Update author address and affiliation.</t>
-          <t>Removed the &lt;Certificate&gt; element from the XML
-            schema.</t>
-        </section>
-
-      </section>
     </section>
   </back>
 </rfc>

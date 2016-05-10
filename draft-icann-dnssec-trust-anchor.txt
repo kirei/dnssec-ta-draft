@@ -5,12 +5,12 @@
 Network Working Group                                           J. Abley
 Internet-Draft                                                 Dyn, Inc.
 Intended status: Informational                               J. Schlyter
-Expires: November 3, 2016                                       Kirei AB
+Expires: November 10, 2016                                      Kirei AB
                                                                G. Bailey
                                                              Independent
                                                               P. Hoffman
                                                                    ICANN
-                                                             May 2, 2016
+                                                             May 9, 2016
 
 
            DNSSEC Trust Anchor Publication for the Root Zone
@@ -23,13 +23,8 @@ Abstract
 
    In order to obtain secure answers from the root zone of the DNS using
    DNSSEC, a client must configure a suitable trust anchor.  This
-   document describes how such trust anchors are currently formatted and
-   published by IANA.
-
-   TODO BEFORE PUBLICATION:
-
-      Jakob wants to put back the discussion of what might be deprecated
-      in the future
+   document describes the format and publication mechanisms IANA has
+   used to distribute the DNSSEC trust anchors.
 
 Status of This Memo
 
@@ -46,17 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 3, 2016.
-
-
-
-
-
-
-Abley, et al.           Expires November 3, 2016                [Page 1]
-
-Internet-Draft     Root Zone Trust Anchor Publication           May 2016
-
+   This Internet-Draft will expire on November 10, 2016.
 
 Copyright Notice
 
@@ -65,6 +50,14 @@ Copyright Notice
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
+
+
+
+Abley, et al.           Expires November 10, 2016               [Page 1]
+
+Internet-Draft     Root Zone Trust Anchor Publication           May 2016
+
+
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
@@ -75,7 +68,7 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Definitions . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  IANA DNSSEC Root Zone Trust Anchor Formats and Semantics  . .   4
      2.1.  Hashes in XML . . . . . . . . . . . . . . . . . . . . . .   4
@@ -97,27 +90,7 @@ Table of Contents
    Appendix A.  Historical Note  . . . . . . . . . . . . . . . . . .  13
    Appendix B.  About this Document  . . . . . . . . . . . . . . . .  13
      B.1.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .  13
-     B.2.  Document History  . . . . . . . . . . . . . . . . . . . .  13
-       B.2.1.  draft-jabley-dnssec-trust-anchor-00 . . . . . . . . .  13
-       B.2.2.  draft-jabley-dnssec-trust-anchor-01 . . . . . . . . .  14
-       B.2.3.  draft-jabley-dnssec-trust-anchor-02 . . . . . . . . .  14
-       B.2.4.  draft-jabley-dnssec-trust-anchor-04 . . . . . . . . .  14
-       B.2.5.  draft-jabley-dnssec-trust-anchor-05 . . . . . . . . .  14
-       B.2.6.  draft-jabley-dnssec-trust-anchor-06 . . . . . . . . .  14
-       B.2.7.  draft-jabley-dnssec-trust-anchor-07 . . . . . . . . .  14
-       B.2.8.  draft-jabley-dnssec-trust-anchor-10 . . . . . . . . .  14
-
-
-
-Abley, et al.           Expires November 3, 2016                [Page 2]
-
-Internet-Draft     Root Zone Trust Anchor Publication           May 2016
-
-
-       B.2.9.  draft-jabley-dnssec-trust-anchor-11 . . . . . . . . .  14
-       B.2.10. draft-jabley-dnssec-trust-anchor-12 . . . . . . . . .  14
-       B.2.11. draft-jabley-dnssec-trust-anchor-13 . . . . . . . . .  14
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  13
 
 1.  Introduction
 
@@ -133,6 +106,14 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
    signatures that allow the integrity and authenticity of the RRSet to
    be verified.  DNSSEC signatures are validated by following a chain of
    signatures to a "trust anchor".  The reason for trusting a trust
+
+
+
+Abley, et al.           Expires November 10, 2016               [Page 2]
+
+Internet-Draft     Root Zone Trust Anchor Publication           May 2016
+
+
    anchor is outside the DNSSEC protocol, but having one or more trust
    anchors is required for the DNSSEC protocol to work.
 
@@ -143,12 +124,16 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
    dnssec/>.
 
    This document describes the formats and distribution methods of
-   DNSSEC trust anchors currently used by IANA for the root zone of the
-   DNS.  Other organizations might have different formats and mechansims
-   for distributing DNSSEC trust anchors for the root zone; however,
-   most operators and software vendors have chosen to rely on the IANA
-   trust anchors.  IANA may change the formats and distribution methods
-   in the future.
+   DNSSEC trust anchors that have been used by IANA for the root zone of
+   the DNS since 2010.  Other organizations might have different formats
+   and mechansims for distributing DNSSEC trust anchors for the root
+   zone; however, most operators and software vendors have chosen to
+   rely on the IANA trust anchors.
+
+   IMPORTANT NOTE: at the time of this writing, IANA intends to change
+   the formats and distribution methods in the future.  If such a change
+   happens, IANA will publish the changes on its web site at
+   <https://www.iana.org/dnssec/files>.
 
    The formats and distribution methods described in this document are a
    complement to, not a substitute for, the automated DNSSEC trust
@@ -161,15 +146,6 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
    The term "trust anchor" is used in many different contexts in the
    security community.  Many of the common definitions conflict because
-
-
-
-
-Abley, et al.           Expires November 3, 2016                [Page 3]
-
-Internet-Draft     Root Zone Trust Anchor Publication           May 2016
-
-
    they are specific to a specific system, such as just for DNSSEC or
    just for S/MIME messages.
 
@@ -185,6 +161,14 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
    do not match the definition of "trust anchor" from [RFC4033];
    however, a system that wants to convert the trusted material from
    IANA into a DS RR can do so.
+
+
+
+
+Abley, et al.           Expires November 10, 2016               [Page 3]
+
+Internet-Draft     Root Zone Trust Anchor Publication           May 2016
+
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
@@ -221,7 +205,23 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
 
-Abley, et al.           Expires November 3, 2016                [Page 4]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Abley, et al.           Expires November 10, 2016               [Page 4]
 
 Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
@@ -277,7 +277,7 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
 
-Abley, et al.           Expires November 3, 2016                [Page 5]
+Abley, et al.           Expires November 10, 2016               [Page 5]
 
 Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
@@ -333,7 +333,7 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
 
-Abley, et al.           Expires November 3, 2016                [Page 6]
+Abley, et al.           Expires November 10, 2016               [Page 6]
 
 Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
@@ -389,7 +389,7 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
 
-Abley, et al.           Expires November 3, 2016                [Page 7]
+Abley, et al.           Expires November 10, 2016               [Page 7]
 
 Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
@@ -445,7 +445,7 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
 
-Abley, et al.           Expires November 3, 2016                [Page 8]
+Abley, et al.           Expires November 10, 2016               [Page 8]
 
 Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
@@ -501,7 +501,7 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
 
-Abley, et al.           Expires November 3, 2016                [Page 9]
+Abley, et al.           Expires November 10, 2016               [Page 9]
 
 Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
@@ -557,7 +557,7 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
 
-Abley, et al.           Expires November 3, 2016               [Page 10]
+Abley, et al.           Expires November 10, 2016              [Page 10]
 
 Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
@@ -613,7 +613,7 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
 
-Abley, et al.           Expires November 3, 2016               [Page 11]
+Abley, et al.           Expires November 10, 2016              [Page 11]
 
 Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
@@ -669,7 +669,7 @@ Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
 
-Abley, et al.           Expires November 3, 2016               [Page 12]
+Abley, et al.           Expires November 10, 2016              [Page 12]
 
 Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
@@ -711,81 +711,6 @@ B.1.  Discussion
 
    The authors also welcome feedback sent to them directly.
 
-B.2.  Document History
-
-B.2.1.  draft-jabley-dnssec-trust-anchor-00
-
-   This document is based on earlier documentation used within and
-   published by the team responsible for DNSSEC deployment in the root
-   zone.  This is the first revision circulated with the intention of
-   publication in the RFC series.
-
-
-
-
-
-
-Abley, et al.           Expires November 3, 2016               [Page 13]
-
-Internet-Draft     Root Zone Trust Anchor Publication           May 2016
-
-
-B.2.2.  draft-jabley-dnssec-trust-anchor-01
-
-   Incorporated initial community suggestions.  Editorial improvements.
-   Allocate OID and clean up syntax of ASN.1 module.
-
-B.2.3.  draft-jabley-dnssec-trust-anchor-02
-
-   Draft expired.
-
-B.2.4.  draft-jabley-dnssec-trust-anchor-04
-
-   Added the optional <Certificate> element to the XML schema to provide
-   a mechanism for locating external X.509 certificates relating to a
-   particular key.
-
-B.2.5.  draft-jabley-dnssec-trust-anchor-05
-
-   Update author address.
-
-B.2.6.  draft-jabley-dnssec-trust-anchor-06
-
-   Update references.
-
-B.2.7.  draft-jabley-dnssec-trust-anchor-07
-
-   Minor changes based on review by Paul Hoffman.
-
-B.2.8.  draft-jabley-dnssec-trust-anchor-10
-
-   Incorporate additional suggestions by Paul Hoffman.  Add
-   consideration for OCSP to Implementation Considerations.
-
-B.2.9.  draft-jabley-dnssec-trust-anchor-11
-
-   Draft expired.
-
-B.2.10.  draft-jabley-dnssec-trust-anchor-12
-
-   Draft expired.
-
-B.2.11.  draft-jabley-dnssec-trust-anchor-13
-
-   Update author address and affiliation.
-
-   Removed the <Certificate> element from the XML schema.
-
-
-
-
-
-
-Abley, et al.           Expires November 3, 2016               [Page 14]
-
-Internet-Draft     Root Zone Trust Anchor Publication           May 2016
-
-
 Authors' Addresses
 
    Joe Abley
@@ -796,6 +721,13 @@ Authors' Addresses
 
    Phone: +1 519 670 9327
    Email: jabley@dyn.com
+
+
+
+
+Abley, et al.           Expires November 10, 2016              [Page 13]
+
+Internet-Draft     Root Zone Trust Anchor Publication           May 2016
 
 
    Jakob Schlyter
@@ -837,4 +769,16 @@ Authors' Addresses
 
 
 
-Abley, et al.           Expires November 3, 2016               [Page 15]
+
+
+
+
+
+
+
+
+
+
+
+
+Abley, et al.           Expires November 10, 2016              [Page 14]
