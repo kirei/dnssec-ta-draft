@@ -474,16 +474,12 @@ have assurance of data origin.</t>
 </section>
 
     <section title="IANA Considerations">
-      <t>Key Signing Key (KSK) management for the root zone is an
-        IANA function. This document describes an initial set of
-        publication mechanisms for trust anchors related to that
-        management. In the future, additional publication schemes
-        may also be made available, in which case they will be
-        described in a new document that updates this one.</t>
+      <t>This document defines id-mod-dns-resource-record, value 70 (see <xref
+      target="certs"/>), in the SMI Security for PKIX Module Identifier
+      registry.</t>
 
-      <t><xref target="certs"/> serves as the reference for id-mod-dns-resource-record,
-      value 70, in the SMI Security for PKIX Module Identifier registry.</t>
-
+      <t>Beyond the IANA registry action above, this document makes no other
+      requests and places no further restrictions on IANA.</t>
     </section>
 
     <section title="Security Considerations">
