@@ -14,7 +14,7 @@ Expires: January 9, 2017                                        Kirei AB
 
 
            DNSSEC Trust Anchor Publication for the Root Zone
-                 draft-jabley-dnssec-trust-anchor-pre15
+                 draft-jabley-dnssec-trust-anchor-15
 
 Abstract
 
