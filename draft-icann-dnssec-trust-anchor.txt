@@ -5,12 +5,12 @@
 Network Working Group                                           J. Abley
 Internet-Draft                                                 Dyn, Inc.
 Intended status: Informational                               J. Schlyter
-Expires: January 7, 2017                                        Kirei AB
+Expires: January 9, 2017                                        Kirei AB
                                                                G. Bailey
                                                              Independent
                                                               P. Hoffman
                                                                    ICANN
-                                                            July 6, 2016
+                                                            July 8, 2016
 
 
            DNSSEC Trust Anchor Publication for the Root Zone
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 7, 2017.
+   This Internet-Draft will expire on January 9, 2017.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Abley, et al.            Expires January 7, 2017                [Page 1]
+Abley, et al.            Expires January 9, 2017                [Page 1]
 
 Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
@@ -81,7 +81,7 @@ Table of Contents
    3.  Root Zone Trust Anchor Retrieval  . . . . . . . . . . . . . .   9
      3.1.  Retrieving Trust Anchors with HTTPS and HTTP  . . . . . .   9
    4.  Accepting DNSSEC Trust Anchors  . . . . . . . . . . . . . . .  10
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  11
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  11
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
@@ -90,7 +90,7 @@ Table of Contents
    Appendix A.  Historical Note  . . . . . . . . . . . . . . . . . .  13
    Appendix B.  About this Document  . . . . . . . . . . . . . . . .  13
      B.1.  Discussion  . . . . . . . . . . . . . . . . . . . . . . .  13
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  13
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Abley, et al.            Expires January 7, 2017                [Page 2]
+Abley, et al.            Expires January 9, 2017                [Page 2]
 
 Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
@@ -165,7 +165,7 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
 
 
-Abley, et al.            Expires January 7, 2017                [Page 3]
+Abley, et al.            Expires January 9, 2017                [Page 3]
 
 Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
@@ -221,7 +221,7 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
 
 
-Abley, et al.            Expires January 7, 2017                [Page 4]
+Abley, et al.            Expires January 9, 2017                [Page 4]
 
 Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
@@ -277,7 +277,7 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
 
 
-Abley, et al.            Expires January 7, 2017                [Page 5]
+Abley, et al.            Expires January 9, 2017                [Page 5]
 
 Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
@@ -333,7 +333,7 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
 
 
-Abley, et al.            Expires January 7, 2017                [Page 6]
+Abley, et al.            Expires January 9, 2017                [Page 6]
 
 Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
@@ -389,7 +389,7 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
 
 
-Abley, et al.            Expires January 7, 2017                [Page 7]
+Abley, et al.            Expires January 9, 2017                [Page 7]
 
 Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
@@ -445,7 +445,7 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
 
 
-Abley, et al.            Expires January 7, 2017                [Page 8]
+Abley, et al.            Expires January 9, 2017                [Page 8]
 
 Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
@@ -501,7 +501,7 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
 
 
-Abley, et al.            Expires January 7, 2017                [Page 9]
+Abley, et al.            Expires January 9, 2017                [Page 9]
 
 Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
@@ -535,9 +535,14 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
    The content and origin of the XML file can be verified using a
    digital signature on the file.  IANA provides a detached CMS
-   [RFC5652] that chains to the ICANN CA with the XML file.  The URL for
-   a detached CMS signature for the XML file is <https://data.iana.org/
-   root-anchors/root-anchors.p7s>.
+   [RFC5652] signature that chains to the ICANN CA with the XML file.
+   The URL for a detached CMS signature for the XML file is
+   <https://data.iana.org/root-anchors/root-anchors.p7s>.
+
+   (IANA also provided a detached OpenPGP [RFC4880] signature as a
+   second parallel verification mechanism for the first trust anchor
+   publication, but has indicated that it will not use this parallel
+   mechanism in the future.)
 
    Another method IANA uses to help validator operators verify the
    content and origin of trust anchors they receive is to use the TLS
@@ -548,19 +553,20 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
    server, HTTPS SHOULD be used instead of HTTP in order to have
    assurance of data origin.
 
+
+
+
+
+Abley, et al.            Expires January 9, 2017               [Page 10]
+
+Internet-Draft     Root Zone Trust Anchor Publication          July 2016
+
+
 5.  IANA Considerations
 
    This document defines id-mod-dns-resource-record, value 70 (see
    Section 2.2), in the SMI Security for PKIX Module Identifier
    registry.
-
-
-
-
-Abley, et al.            Expires January 7, 2017               [Page 10]
-
-Internet-Draft     Root Zone Trust Anchor Publication          July 2016
-
 
    Beyond the IANA registry action above, this document makes no other
    requests and places no further restrictions on IANA.
@@ -602,6 +608,16 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
               DOI 10.17487/RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+
+
+Abley, et al.            Expires January 9, 2017               [Page 11]
+
+Internet-Draft     Root Zone Trust Anchor Publication          July 2016
+
+
    [RFC2986]  Nystrom, M. and B. Kaliski, "PKCS #10: Certification
               Request Syntax Specification Version 1.7", RFC 2986,
               DOI 10.17487/RFC2986, November 2000,
@@ -610,13 +626,6 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
    [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
               Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
               <http://www.rfc-editor.org/info/rfc3339>.
-
-
-
-Abley, et al.            Expires January 7, 2017               [Page 11]
-
-Internet-Draft     Root Zone Trust Anchor Publication          July 2016
-
 
    [RFC4033]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "DNS Security Introduction and Requirements",
@@ -657,6 +666,14 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <http://www.rfc-editor.org/info/rfc5652>.
 
+
+
+
+Abley, et al.            Expires January 9, 2017               [Page 12]
+
+Internet-Draft     Root Zone Trust Anchor Publication          July 2016
+
+
    [RFC5702]  Jansen, J., "Use of SHA-2 Algorithms with RSA in DNSKEY
               and RRSIG Resource Records for DNSSEC", RFC 5702,
               DOI 10.17487/RFC5702, October 2009,
@@ -667,19 +684,17 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
               DOI 10.17487/RFC6781, December 2012,
               <http://www.rfc-editor.org/info/rfc6781>.
 
-
-
-Abley, et al.            Expires January 7, 2017               [Page 12]
-
-Internet-Draft     Root Zone Trust Anchor Publication          July 2016
-
-
 8.2.  Informative References
 
    [DPS]      Ljunggren, F., Okubo, T., Lamb, R., and J. Schlyter,
               "DNSSEC Practice Statement for the Root Zone KSK
               Operator", October 2010, <https://www.iana.org/dnssec/
               icann-dps.txt>.
+
+   [RFC4880]  Callas, J., Donnerhacke, L., Finney, H., Shaw, D., and R.
+              Thayer, "OpenPGP Message Format", RFC 4880,
+              DOI 10.17487/RFC4880, November 2007,
+              <http://www.rfc-editor.org/info/rfc4880>.
 
 Appendix A.  Historical Note
 
@@ -706,6 +721,15 @@ B.1.  Discussion
 
    The authors also welcome feedback sent to them directly.
 
+
+
+
+
+Abley, et al.            Expires January 9, 2017               [Page 13]
+
+Internet-Draft     Root Zone Trust Anchor Publication          July 2016
+
+
 Authors' Addresses
 
    Joe Abley
@@ -722,12 +746,6 @@ Authors' Addresses
    Kirei AB
 
    Email: jakob@kirei.se
-
-
-
-Abley, et al.            Expires January 7, 2017               [Page 13]
-
-Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
 
    Guillaume Bailey
@@ -763,22 +781,4 @@ Internet-Draft     Root Zone Trust Anchor Publication          July 2016
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Abley, et al.            Expires January 7, 2017               [Page 14]
+Abley, et al.            Expires January 9, 2017               [Page 14]

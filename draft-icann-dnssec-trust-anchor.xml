@@ -11,6 +11,7 @@
 <!ENTITY rfc4034 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4034.xml">
 <!ENTITY rfc4035 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4035.xml">
 <!ENTITY rfc4509 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4509.xml">
+<!ENTITY rfc4880 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4880.xml">
 <!ENTITY rfc5280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5280.xml">
 <!ENTITY rfc5011 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5011.xml">
 <!ENTITY rfc5155 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5155.xml">
@@ -459,9 +460,13 @@ format.</t>
 
 <t>The content and origin of the XML file can be verified using
 a digital signature on the file. IANA provides a detached CMS <xref
-target="RFC5652"/> that chains to the ICANN CA with the XML file. The URL for a
+target="RFC5652"/> signature that chains to the ICANN CA with the XML file. The URL for a
 detached CMS signature for the XML file is
 &lt;https://data.iana.org/root-anchors/root-anchors.p7s&gt;.</t>
+
+<t>(IANA also provided a detached OpenPGP <xref target="RFC4880"/> signature as
+a second parallel verification mechanism for the first trust anchor publication,
+but has indicated that it will not use this parallel mechanism in the future.)</t>
 
 <t>Another method IANA uses to help validator operators verify the content and
 origin of trust anchors they receive is to use the TLS protocol for distributing
@@ -528,6 +533,7 @@ have assurance of data origin.</t>
 
     <references title="Informative References">
 
+      &rfc4880;
       <reference anchor="DPS"
              target="https://www.iana.org/dnssec/icann-dps.txt">
         <front>
