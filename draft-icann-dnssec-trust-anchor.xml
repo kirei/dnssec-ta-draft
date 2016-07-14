@@ -25,6 +25,17 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 
+<!--
+###################################################################
+
+Possibly change 
+    EQUALITY MATCHING RULE caseIgnoreIA5Match
+to
+    EQUALITY MATCHING RULE caseIgnoreMatch
+
+###################################################################
+-->
+
 <rfc category="info" docName="draft-jabley-dnssec-trust-anchor-pre15" 
   ipr="trust200902">
 
